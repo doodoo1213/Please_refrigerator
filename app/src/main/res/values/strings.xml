@@ -3,9 +3,9 @@
     <string name="space1">냉장</string>
     <string name="space2">냉동</string>
     <string name="space3">기타</string>
-    <string name="type1">고기</string>
-    <string name="type2">야채</string>
-    <string name="type3">기타</string>
+    <string name="txt_title_meat">고기</string>
+    <string name="txt_title_vegetable">야채</string>
+    <string name="txt_title_etc">기타</string>
     <string name="space_prompt">음식 종류</string>
     <string-array name="space">
         <item>육류</item>
@@ -13,5 +13,5 @@
         <item>채소</item>
         <item>기타</item>
     </string-array>
-    <string name="input">추가</string>
+    <string name="txt_input">추가</string>
 </resources>

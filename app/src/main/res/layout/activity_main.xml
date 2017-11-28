@@ -1,106 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.example.kimjuyoung.please_refrigerator.MainActivity">
-
-<TextView
-    android:id="@+id/Vegetable"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/type2"
-    android:textColor="@color/colorPrimary"
-    android:textSize="25sp"
-    android:layout_marginTop="100dp"
-    android:layout_below="@+id/Meat"
-    android:layout_alignLeft="@+id/Meat"
-    android:layout_alignStart="@+id/Meat" />
-
-<TextView
-    android:id="@+id/etc"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/type3"
-    android:textColor="@color/colorPrimaryDark"
-    android:textSize="25sp"
-    tools:layout_editor_absoluteY="267dp"
-    tools:layout_editor_absoluteX="16dp"
-    android:layout_marginTop="100dp"
-    android:layout_below="@+id/Vegetable"
-    android:layout_alignLeft="@+id/Vegetable"
-    android:layout_alignStart="@+id/Vegetable" />
-
-<Button
-    android:id="@+id/ADDBTN"
-    android:onClick="Input"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/input"
-    tools:layout_editor_absoluteX="8dp"
-    tools:layout_editor_absoluteY="418dp"
-    android:layout_centerInParent="true"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="20dp"/>
-
-<TextView
-    android:id="@+id/Meat"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/type1"
-    android:textColor="@color/colorAccent"
-    android:textSize="25sp"
-    android:layout_marginTop="25dp"
-    android:layout_marginLeft="20dp"/>
-
-<HorizontalScrollView
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/Meat"
-    android:layout_above="@id/ADDBTN"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentStart="true">
+    android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/m_button_list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/meat_list"
-        />
-</HorizontalScrollView>
+        android:orientation="vertical">
+        <!-- img_meat list -->
+        <TextView
+            android:id="@+id/Meat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_title_meat"
+            android:textColor="@color/colorAccent"
+            android:textSize="25sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"/>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include
+                android:id="@+id/list_meat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/main_items"
+                />
+        </HorizontalScrollView>
 
-<HorizontalScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/Vegetable"
-    android:layout_above="@id/ADDBTN"
-    android:layout_alignLeft="@id/Meat"
-    android:layout_alignStart="@id/Meat">
+        <!-- img_vegetable list -->
+        <TextView
+            android:id="@+id/Vegetable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_title_vegetable"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="25sp" />
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include
+                android:id="@+id/list_vegetable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/main_items"
+                />
+        </HorizontalScrollView>
 
-    <include
-        android:id="@+id/v_button_list"
-        android:layout_width="match_parent"
+        <!-- img_etc list -->
+        <TextView
+            android:id="@+id/etc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_title_etc"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="20dp"/>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include
+                android:id="@+id/list_etc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/main_items"
+                />
+        </HorizontalScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add"
+        android:onClick="Input"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/vegetable_list"
-        />
-</HorizontalScrollView>
-
-<HorizontalScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignLeft="@id/Meat"
-    android:layout_alignStart="@id/Meat"
-    android:layout_below="@+id/etc"
-    android:layout_above="@+id/ADDBTN">
-
-
-    <include
-        android:id="@+id/e_button_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/etc_list"
-        />
-</HorizontalScrollView>
-
-</RelativeLayout>
+        android:text="@string/txt_input"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="20dp"/>
+</FrameLayout>
