@@ -1,5 +1,6 @@
 package com.example.kimjuyoung.please_refrigerator;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,17 +17,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageButton add_button;
-        add_button = (ImageButton)findViewById(R.id.ADDBTN);
-        add_button.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){//+버튼의 동작
-                Toast.makeText(getApplicationContext(),"Alarm",Toast.LENGTH_LONG).show();
-            }
-        });
+
         //버튼 추가
        Vector <Button> m_button = new Vector <Button> (0);
         LinearLayout m_list = (LinearLayout)findViewById(R.id.m_button_list);
-        int meat=5;
+        int meat=5; //음식종류가 '육류'인 튜플 수
         for(int i=0;i<meat;i++){// 원하는 수만큼 버튼 생성
             Button m =  new Button(this);
             m_button.addElement(m);
@@ -36,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Vector <Button> v_button = new Vector <Button> (0);
         LinearLayout v_list = (LinearLayout)findViewById(R.id.v_button_list);
-        int vegetable=3;
+        int vegetable=3;//음식종류가 '야채'인 튜플 수
         for(int j=0;j<vegetable;j++){// 원하는 수만큼 버튼 생성
             Button v =  new Button(this);
             v_button.addElement(v);
@@ -46,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         }
        Vector <Button> e_button = new Vector <Button> (0);
         LinearLayout e_list = (LinearLayout)findViewById(R.id.e_button_list);
-        int etc=1;
+        int etc=1;//음식종류가 '기타'인 튜플 수
         for(int k=0;k<etc;k++){// 원하는 수만큼 버튼 생성
             Button e =  new Button(this);
             e_button.addElement(e);
@@ -55,5 +50,11 @@ public class MainActivity extends AppCompatActivity {
             e_list.addView(e_button.elementAt(k));
         }
 
+    }
+
+    public void Input(View v){//+버튼의 동작
+        Intent input = new Intent(MainActivity.this, InputData.class);
+        startActivity(input);
+        finish();
     }
 }
