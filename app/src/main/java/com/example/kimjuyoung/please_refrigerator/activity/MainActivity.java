@@ -1,5 +1,6 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -67,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_add)
     public void Input(View v){//+버튼의 동작
-        // Intent input = new Intent(MainActivity.this, InputData.class);
-        // startActivity(input);
+        Intent input = new Intent(MainActivity.this, InputData.class);
+        startActivity(input);
         finish();
     }
 }

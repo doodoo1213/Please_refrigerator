@@ -2,7 +2,7 @@
     <string name="app_name">냉장고를 부탁해</string>
     <string name="space1">냉장</string>
     <string name="space2">냉동</string>
-    <string name="space3">기타</string>
+    <string name="space3">상온</string>
     <string name="txt_title_meat">고기</string>
     <string name="txt_title_vegetable">야채</string>
     <string name="txt_title_etc">기타</string>
@@ -14,4 +14,5 @@
         <item>기타</item>
     </string-array>
     <string name="txt_input">추가</string>
+    <string name="txt_home">홈</string>
 </resources>
