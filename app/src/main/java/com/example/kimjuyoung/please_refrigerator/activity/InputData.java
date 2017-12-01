@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.kimjuyoung.please_refrigerator.R;
@@ -31,11 +32,11 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     private static final String pass = "selabkjy"; //it_refrigerator 데이터베이스 비밀번호
 
     CheckBox type_refrigerated, type_frozen, type_etc;
-    EditText name, date;
+    EditText name, date, amount;
     MultiAutoCompleteTextView memo;
-    //Spinner sp;
-    String type = "";
+    Spinner spinner;
     String space = "";
+    String query="";
     int count;
 
     @Override
@@ -46,11 +47,13 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
         type_refrigerated = (CheckBox) findViewById(R.id.checkBox1);
         type_frozen = (CheckBox) findViewById(R.id.checkBox2);
         type_etc = (CheckBox) findViewById(R.id.checkBox3);
-        //sp = (Spinner)findViewById(R.id.spinner);
+        spinner = (Spinner)findViewById(R.id.spinner);
         name = (EditText) findViewById(R.id.editText);
         date = (EditText) findViewById(R.id.editText2);
+        amount = (EditText)findViewById(R.id.editText3);
         memo = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView);
         // 각 부분에서 값들을 저장하기 위한 변수들
+
         type_refrigerated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,21 +73,21 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
             }
         });
     }
-    public String Checked(View view) {
+   public String Checked(View view) {
         count = 0;
         if(type_refrigerated.isChecked()) {
-            type = "refrigerated";
+            space = "refrigerated";
             count++;
         }
         if(type_frozen.isChecked()) {
-            type = "frozen";
+            space = "frozen";
             count++;
         }
         if(type_etc.isChecked()) {
-            type = "etc";
+            space = "etc";
             count++;
         }
-        return type;
+        return space;
     }
 
     public void onClick(View view) {
@@ -103,6 +106,8 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
         String text_name = name.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
         String text_date = date.getText().toString(); //데이터베이스에 들어갈 입력받은 날짜 string으로 text_date 에 저장
         String text_memo = memo.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
+        String item_type = spinner.getSelectedItem().toString();
+        int item_amount = Integer.parseInt(amount.getText().toString());
 
         @Override
         protected void onPreExecute() {
@@ -118,18 +123,31 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                 {
                     msg = "Connection goes wrong"; // 연결이 실패했을 때 에러 문자열 msg로 저장
                 }
-                if(count>1){
-                    msg = "저장공간을 하나만 선택해주세요.";
-                }
                 else {
-                    String query = "INSERT INTO expiration_date (type, name, date, memo) VALUES ('" + type + "', '" + text_name + "', '" + text_date + "', '" + text_memo + "')";
-                    // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
-                    Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
-                    stmt.executeUpdate(query); // 쿼리 실행
-                    if(count == 1)
-                        msg = "Success";
-                    // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
-
+                    if (count > 1) {
+                        msg = "저장공간을 하나만 선택해주세요.";
+                    }
+                    else if(count < 1) {
+                        msg = "저장공간을 선택해 주세요";
+                    }
+                    else
+                    {
+                        if (space.equals("refrigerated")) {
+                            query = "INSERT INTO COLDSTORAGE (type, fname, amount, shelflife, etc) VALUES ('beef', '" + text_name + "', '" + item_amount + "', '" + text_date + "', '" + text_memo + "')";
+                            // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
+                        }
+                        else if (space.equals("frozen")) {
+                            query = "INSERT INTO COLDSTORAGE (type, fname, amount, shelflife, etc) VALUES ('vegetable', '" + text_name + "', '" + item_amount + "', '" + text_date + "', '" + text_memo + "')";
+                            // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
+                        }
+                        else if (space.equals("etc")) {
+                            query = "INSERT INTO COLDSTORAGE (type, fname, amount, shelflife, etc) VALUES ('etc', '" + text_name + "', " + item_amount + ", '" + text_date + "', '" + text_memo + "')";
+                            // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
+                        }
+                        Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
+                        stmt.executeUpdate(query); // 쿼리 실행
+                        msg = "Success"; // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
+                    }
                 }
                 conn.close();
             } catch (Exception e) {
