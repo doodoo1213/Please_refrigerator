@@ -58,8 +58,6 @@ public class Ordinary extends Fragment implements View.OnClickListener{
         etc_info.add(new Food_info("egg", "2015.01.01"));
         etc_info.add(new Food_info("egg2", "2015.01.02"));
         etc_info.add(new Food_info("egg3", "2015.01.02"));
-        etc_info.add(new Food_info("egg4", "2015.01.02"));
-        etc_info.add(new Food_info("egg5", "2015.01.02"));
     }
     private void initList() {
         input_data();

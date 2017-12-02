@@ -51,7 +51,7 @@ public class Freezer extends Fragment implements View.OnClickListener{
     }
     private void input_data(){
         meat_info.add(new Food_info("Beef", "2015.01.01"));
-        meat_info.add(new Food_info("Meat", "2015.01.02"));
+
 
         vege_info.add(new Food_info("onion", "2015.01.01"));
 
