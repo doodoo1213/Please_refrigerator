@@ -95,8 +95,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="date"
-        android:text="//"
+        android:inputType="text"
+        android:hint="년/월/일"
         android:ems="10"
         android:id="@+id/editText2"
         android:layout_marginTop="20dp"
@@ -153,28 +153,29 @@
         android:layout_alignLeft="@+id/editText2"
         android:layout_alignStart="@+id/editText2"
         android:layout_alignRight="@id/editText2"
-        android:layout_alignEnd="@id/editText2"/>
+        android:layout_alignEnd="@id/editText2"
+        android:layout_above="@id/button"/>
 
     <Button
-        android:text="@string/txt_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="btnConn"
         android:id="@+id/button"
-        android:layout_marginBottom="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="100dp"/>
-
-    <Button
-        android:text="@string/txt_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="Return"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/success"
+        android:onClick="btnConn" />
+
+    <Button
         android:id="@+id/button1"
-    android:layout_marginBottom="30dp"
-    android:layout_alignStart="@id/button"
-    android:layout_marginLeft="100dp"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="start|bottom"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/home"
+        android:onClick="Return" />
 
 </RelativeLayout>

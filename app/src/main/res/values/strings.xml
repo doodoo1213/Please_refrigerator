@@ -4,12 +4,12 @@
     <string name="space2">냉동</string>
     <string name="space3">상온</string>
     <string name="txt_title_meat">고기</string>
-    <string name="txt_title_vegetable">야채</string>
+    <string name="txt_title_vegetable">채소</string>
     <string name="txt_title_etc">기타</string>
     <string name="space_prompt">음식 종류</string>
     <string-array name="space">
-        <item>육류</item>
-        <item>생선</item>
+        <item>음식종류</item>
+        <item>고기</item>
         <item>채소</item>
         <item>기타</item>
     </string-array>

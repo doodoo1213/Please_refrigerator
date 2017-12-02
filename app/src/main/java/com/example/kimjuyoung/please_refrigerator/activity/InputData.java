@@ -4,9 +4,11 @@ package com.example.kimjuyoung.please_refrigerator.activity;
  * Created by Kim juyoung on 2017-11-30.
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -20,6 +22,8 @@ import com.example.kimjuyoung.please_refrigerator.R;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Kim juyoung on 2017-11-28.
@@ -38,6 +42,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     String space = "";
     String query="";
     int count;
+    Date now = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,19 +77,22 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                 Checked(view);
             }
         });
+
+        SimpleDateFormat today = new SimpleDateFormat("yyyy/MM/dd");
+        date.setText(today.format(new Date()));
     }
    public String Checked(View view) {
         count = 0;
         if(type_refrigerated.isChecked()) {
-            space = "refrigerated";
+            space = "냉장";
             count++;
         }
         if(type_frozen.isChecked()) {
-            space = "frozen";
+            space = "냉동";
             count++;
         }
         if(type_etc.isChecked()) {
-            space = "etc";
+            space = "기타";
             count++;
         }
         return space;
@@ -103,10 +111,12 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     private class Send extends AsyncTask<String, String, String>
     {
         String msg = ""; //알림 띄울 문자열 초기화
+        String msg1 = "";
         String text_name = name.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
         String text_date = date.getText().toString(); //데이터베이스에 들어갈 입력받은 날짜 string으로 text_date 에 저장
         String text_memo = memo.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
         String item_type = spinner.getSelectedItem().toString();
+        //String item_type = "NULL";
         int item_amount = Integer.parseInt(amount.getText().toString());
 
         @Override
@@ -125,30 +135,42 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                 }
                 else {
                     if (count > 1) {
-                        msg = "저장공간을 하나만 선택해주세요.";
+                        msg1 = "저장공간을 하나만 선택해주세요.";
                     }
                     else if(count < 1) {
-                        msg = "저장공간을 선택해 주세요";
+                        msg1 = "저장공간을 선택해 주세요";
                     }
-                    else
-                    {
-                        if (space.equals("refrigerated")) {
-                            query = "INSERT INTO COLDSTORAGE (type, fname, amount, shelflife, etc) VALUES ('beef', '" + text_name + "', '" + item_amount + "', '" + text_date + "', '" + text_memo + "')";
+                   /* if(!type.equals("음식종류")&&!type.isEmpty()){
+                        item_type = type;
+                    }*/
+                    /*if(date.equals(now))
+                        {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(InputData.this);
+                            builder.setTitle("유통기한 확인");
+                            builder.setMessage("입력하려는 유통기한이 "+now+"가 맞습니까?");
+                            builder.setPositiveButton("예",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i){
+                                        }
+                                    });
+                            builder.setNegativeButton("아니오",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            date.setText(null);
+                                        }
+                                    });
+                            builder.show();
+                        }*/
+                        if(count ==1) {
+                            query = "INSERT INTO STORAGE (space, type, name, life, amount, memo) VALUES ('" + space + "', '" + item_type + "', '" + text_name + "', '" + text_date + "', " + item_amount + ",  '" + text_memo + "')";
                             // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
+                            Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
+                            stmt.executeUpdate(query); // 쿼리 실행
+                            msg = "입력되었습니다."; // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
                         }
-                        else if (space.equals("frozen")) {
-                            query = "INSERT INTO COLDSTORAGE (type, fname, amount, shelflife, etc) VALUES ('vegetable', '" + text_name + "', '" + item_amount + "', '" + text_date + "', '" + text_memo + "')";
-                            // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
-                        }
-                        else if (space.equals("etc")) {
-                            query = "INSERT INTO COLDSTORAGE (type, fname, amount, shelflife, etc) VALUES ('etc', '" + text_name + "', " + item_amount + ", '" + text_date + "', '" + text_memo + "')";
-                            // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
-                        }
-                        Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
-                        stmt.executeUpdate(query); // 쿼리 실행
-                        msg = "Success"; // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
                     }
-                }
                 conn.close();
             } catch (Exception e) {
                 msg = "입력을 확인 해 주세요."; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장
@@ -160,20 +182,12 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
 
         @Override
         protected void onPostExecute(String s) {
+            Toast.makeText(InputData.this, msg1, Toast.LENGTH_LONG).show();
             Toast.makeText(InputData.this, msg, Toast.LENGTH_LONG).show();
         } // 실행 후 msg로 저장한 문자열 알림창으로 보여주기(실패인지, 성공인지)
     }
 
-    /*    public void onClick(View v) {
-            if(type_refrigerated.isChecked() == true)
-                ;
-            if(type_frozen.isChecked() == true)
-                ;
-            if(type_etc.isChecked() == true)
-                ;
-        }
-    */
-    public void Return(View v){//+버튼의 동작
+    public void Return(View v){//버튼의 동작
         Intent home = new Intent(InputData.this, MainActivity.class);
         startActivity(home);
         finish();
