@@ -41,8 +41,9 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     Spinner spinner;
     String space = "";
     String query="";
-    int count;
-    Date now = new Date();
+    int count = 0;
+    SimpleDateFormat today = new SimpleDateFormat("yyyy/MM/dd");
+//    Date now = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,6 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
             }
         });
 
-        SimpleDateFormat today = new SimpleDateFormat("yyyy/MM/dd");
         date.setText(today.format(new Date()));
     }
    public String Checked(View view) {
@@ -135,14 +135,11 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                 }
                 else {
                     if (count > 1) {
-                        msg1 = "저장공간을 하나만 선택해주세요.";
+                        msg = "저장공간을 하나만 선택해주세요.";
                     }
                     else if(count < 1) {
-                        msg1 = "저장공간을 선택해 주세요";
+                        msg = "저장공간을 선택해 주세요";
                     }
-                   /* if(!type.equals("음식종류")&&!type.isEmpty()){
-                        item_type = type;
-                    }*/
                     /*if(date.equals(now))
                         {
                             AlertDialog.Builder builder = new AlertDialog.Builder(InputData.this);
@@ -163,7 +160,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                                     });
                             builder.show();
                         }*/
-                        if(count ==1) {
+                        else {
                             query = "INSERT INTO STORAGE (space, type, name, life, amount, memo) VALUES ('" + space + "', '" + item_type + "', '" + text_name + "', '" + text_date + "', " + item_amount + ",  '" + text_memo + "')";
                             // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
                             Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
@@ -182,8 +179,12 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(InputData.this, msg1, Toast.LENGTH_LONG).show();
             Toast.makeText(InputData.this, msg, Toast.LENGTH_LONG).show();
+            if(msg.equals("입력되었습니다.")) {
+                Intent intent = new Intent(InputData.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         } // 실행 후 msg로 저장한 문자열 알림창으로 보여주기(실패인지, 성공인지)
     }
 
