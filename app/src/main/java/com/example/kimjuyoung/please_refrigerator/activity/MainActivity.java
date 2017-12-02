@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity
         vp.setCurrentItem(0);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.Tab_list);
-        tabLayout.addTab(tabLayout.newTab().setText("냉장"));
         tabLayout.setupWithViewPager(vp);
 
     }
