@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         ButterKnife.bind(this);                 // using ButterKnife
 
         initList();
+
+        
     }
     //input data
     private void input_data(){
@@ -140,5 +144,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 
 }
