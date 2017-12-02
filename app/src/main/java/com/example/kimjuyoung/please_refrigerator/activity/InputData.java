@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.kimjuyoung.please_refrigerator.R;
+
+import org.w3c.dom.Text;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -140,6 +143,9 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                     else if(count < 1) {
                         msg = "저장공간을 선택해 주세요";
                     }
+                    else if(TextUtils.isEmpty(name.getText())){
+                        msg = "이름을 입력해주세요";
+                    }
                     /*if(date.equals(now))
                         {
                             AlertDialog.Builder builder = new AlertDialog.Builder(InputData.this);
@@ -170,7 +176,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                     }
                 conn.close();
             } catch (Exception e) {
-                msg = "입력을 확인 해 주세요."; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장
+                msg = "유통기한을 확인해 주세요."; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장
                 e.printStackTrace();
             }
 

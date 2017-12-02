@@ -95,7 +95,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
+        android:inputType="date"
         android:hint="년/월/일"
         android:ems="10"
         android:id="@+id/editText2"
