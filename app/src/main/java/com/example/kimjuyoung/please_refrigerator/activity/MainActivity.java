@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 
 import com.example.kimjuyoung.please_refrigerator.R;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity
 
     private class pagerAdapter extends FragmentStatePagerAdapter
     {
-        private String[] tabTitles = new String[]{"냉장고", "냉동고", "상온"};
+        private String[] tabTitles = new String[]{"냉장", "냉동", "상온"};
 
         public pagerAdapter(android.support.v4.app.FragmentManager fm)
         {

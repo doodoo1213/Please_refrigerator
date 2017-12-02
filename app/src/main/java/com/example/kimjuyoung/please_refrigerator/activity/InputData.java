@@ -20,13 +20,13 @@ import android.widget.Toast;
 
 import com.example.kimjuyoung.please_refrigerator.R;
 
-import org.w3c.dom.Text;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Kim juyoung on 2017-11-28.
@@ -45,8 +45,14 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     String space = "";
     String query="";
     int count = 0;
-    SimpleDateFormat today = new SimpleDateFormat("yyyy/MM/dd");
-//    Date now = new Date();
+
+    public Calendar getCalendar() {
+        Date currentDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DATE, 7);
+        return calendar;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +88,9 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
             }
         });
 
-        date.setText(today.format(new Date()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date life = getCalendar().getTime();
+        date.setText(dateFormat.format(life));
     }
    public String Checked(View view) {
         count = 0;
@@ -114,7 +122,6 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     private class Send extends AsyncTask<String, String, String>
     {
         String msg = ""; //알림 띄울 문자열 초기화
-        String msg1 = "";
         String text_name = name.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
         String text_date = date.getText().toString(); //데이터베이스에 들어갈 입력받은 날짜 string으로 text_date 에 저장
         String text_memo = memo.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
@@ -146,40 +153,19 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                     else if(TextUtils.isEmpty(name.getText())){
                         msg = "이름을 입력해주세요";
                     }
-                    /*if(date.equals(now))
-                        {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(InputData.this);
-                            builder.setTitle("유통기한 확인");
-                            builder.setMessage("입력하려는 유통기한이 "+now+"가 맞습니까?");
-                            builder.setPositiveButton("예",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i){
-                                        }
-                                    });
-                            builder.setNegativeButton("아니오",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            date.setText(null);
-                                        }
-                                    });
-                            builder.show();
-                        }*/
-                        else {
-                            query = "INSERT INTO STORAGE (space, type, name, life, amount, memo) VALUES ('" + space + "', '" + item_type + "', '" + text_name + "', '" + text_date + "', " + item_amount + ",  '" + text_memo + "')";
-                            // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
-                            Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
-                            stmt.executeUpdate(query); // 쿼리 실행
-                            msg = "입력되었습니다."; // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
-                        }
+                    else {
+                        query = "INSERT INTO STORAGE (space, type, name, life, amount, memo) VALUES ('" + space + "', '" + item_type + "', '" + text_name + "', '" + text_date + "', " + item_amount + ",  '" + text_memo + "')";
+                        // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
+                        Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
+                        stmt.executeUpdate(query); // 쿼리 실행
+                        msg = "입력되었습니다."; // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
                     }
+                }
                 conn.close();
             } catch (Exception e) {
-                msg = "유통기한을 확인해 주세요."; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장
+                msg = "유통기한을 확인해 주세요."; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장, 나머지 부분 오류는 앞에서 이미 처리
                 e.printStackTrace();
             }
-
             return msg;
         }
 
