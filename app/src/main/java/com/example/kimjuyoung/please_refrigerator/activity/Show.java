@@ -20,7 +20,7 @@ import java.util.Vector;
 import butterknife.BindView;
 
 
-public class Freezer extends Fragment implements View.OnClickListener{
+public class Show extends Fragment implements View.OnClickListener{
     ArrayList<Food_info> meat_info = new ArrayList<Food_info>(0);
     ArrayList<Food_info> vege_info = new ArrayList<Food_info>(0);
     ArrayList<Food_info> etc_info = new ArrayList<Food_info>(0);
@@ -29,7 +29,12 @@ public class Freezer extends Fragment implements View.OnClickListener{
     LinearLayout vegetableList;
     LinearLayout etcList;
 
-    public Freezer()
+    int category;
+
+    public void setCategory(int category){
+        this.category = category;
+    }
+    public Show()
     {
     }
 
@@ -50,14 +55,17 @@ public class Freezer extends Fragment implements View.OnClickListener{
         return layout;
     }
     private void input_data(){
+        if(category == 2)
         meat_info.add(new Food_info("Beef", "2015.01.01"));
-
+        meat_info.add(new Food_info("Meat", "2015.01.02"));
 
         vege_info.add(new Food_info("onion", "2015.01.01"));
 
+        if(category == 1)
         etc_info.add(new Food_info("egg", "2015.01.01"));
         etc_info.add(new Food_info("egg2", "2015.01.02"));
         etc_info.add(new Food_info("egg3", "2015.01.02"));
+        if(category == 3)
         etc_info.add(new Food_info("egg4", "2015.01.02"));
         etc_info.add(new Food_info("egg5", "2015.01.02"));
     }
@@ -107,25 +115,25 @@ public class Freezer extends Fragment implements View.OnClickListener{
             case 3 : Show_info(etc_info.get(index));break;
         }
     }
-    private void Show_info(Food_info  food){
+        private void Show_info(Food_info  food){
 
-        final Context context = getView().getContext();
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        // 제목셋팅
-        alertDialogBuilder.setTitle("정보확인");
+            final Context context = getView().getContext();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+            // 제목셋팅
+            alertDialogBuilder.setTitle("정보확인");
 
-        alertDialogBuilder
-                .setMessage("이름 : " + food.name + "\n유통기한 : " + food.exp)
-                .setCancelable(false)
-                .setPositiveButton("확인",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(
-                                    DialogInterface dialog, int id) {
-                                // 다이얼로그를 취소한다
-                                dialog.cancel();
-                            }
-                        });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+            alertDialogBuilder
+                    .setMessage("이름 : " + food.name + "\n유통기한 : " + food.exp)
+                    .setCancelable(false)
+                    .setPositiveButton("확인",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(
+                                        DialogInterface dialog, int id) {
+                                    // 다이얼로그를 취소한다
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
     }
-}

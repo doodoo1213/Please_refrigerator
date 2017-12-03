@@ -54,11 +54,17 @@ public class MainActivity extends AppCompatActivity
             switch(position)
             {
                 case 0:
-                    return new Refrigerator();
+                    Show a = new Show();
+                    a.setCategory(0);
+                    return a;
                 case 1:
-                    return new Freezer();
+                    Show b = new Show();
+                    b.setCategory(1);
+                    return b;
                 case 2:
-                    return new Ordinary();
+                    Show c = new Show();
+                    c.setCategory(2);
+                    return c;
                 default:
                     return null;
             }
