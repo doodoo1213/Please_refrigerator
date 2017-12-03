@@ -17,8 +17,6 @@ import com.example.kimjuyoung.please_refrigerator.R;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import butterknife.BindView;
-
 
 public class Show extends Fragment implements View.OnClickListener{
     ArrayList<Food_info> meat_info = new ArrayList<Food_info>(0);
