@@ -7,9 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 
 import com.example.kimjuyoung.please_refrigerator.R;
@@ -33,21 +31,20 @@ public class MainActivity extends AppCompatActivity
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.Tab_list);
         tabLayout.setupWithViewPager(vp);
+        tabLayout.getTabAt(0).setIcon(R.drawable.refrigerated);
+        tabLayout.getTabAt(1).setIcon(R.drawable.frozen);
+        tabLayout.getTabAt(2).setIcon(R.drawable.etc);
 
     }
 
     private class pagerAdapter extends FragmentStatePagerAdapter
     {
-        private String[] tabTitles = new String[]{"냉장", "냉동", "상온"};
 
         public pagerAdapter(android.support.v4.app.FragmentManager fm)
         {
             super(fm);
         }
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return tabTitles[position];
-        }
+
         @Override
         public android.support.v4.app.Fragment getItem(int position)
         {
