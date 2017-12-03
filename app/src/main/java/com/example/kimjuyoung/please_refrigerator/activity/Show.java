@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,7 @@ public class Show extends Fragment implements View.OnClickListener{
         meat_info.add(new Food_info("Beef", "2015.01.01"));
         meat_info.add(new Food_info("Meat", "2015.01.02"));
 
-        vege_info.add(new Food_info("onion", "2015.01.01"));
+        vege_info.add(new Food_info("토마토", "2015.01.01"));
 
         if(category == 1)
         etc_info.add(new Food_info("egg", "2015.01.01"));
@@ -86,6 +87,8 @@ public class Show extends Fragment implements View.OnClickListener{
             btn_vegetables.addElement(new Button(getActivity()));
             btn_vegetables.elementAt(i).setText(vege_info.get(i).name);
             btn_vegetables.elementAt(i).setBackgroundResource(R.drawable.img_vegetable);
+            btn_vegetables.elementAt(i).setTextSize(18);
+            btn_vegetables.elementAt(i).setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM);
             vegetableList.addView(btn_vegetables.elementAt(i));
             btn_vegetables.elementAt(i).setId(200+i);
             btn_vegetables.elementAt(i).setOnClickListener(this);
