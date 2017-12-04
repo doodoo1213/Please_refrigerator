@@ -16,7 +16,7 @@ import butterknife.OnClick;
 
 
 /**
- * Created by Kim juyoung on 2017-12-04.
+ * Created by 이재연 on 2017-12-04.
  */
 
 public class ListActivity extends AppCompatActivity {
@@ -58,7 +58,7 @@ public class ListActivity extends AppCompatActivity {
         if(checkedItems.get(1)==true)
             a = a + "2";
         if(checkedItems.get(2)==true)
-            a= a+"3";
+            a= a+ "3";
         Toast.makeText(this,a,Toast.LENGTH_LONG).show();
     }
 }
