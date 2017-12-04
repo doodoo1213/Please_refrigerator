@@ -14,6 +14,6 @@ public class activity_homeview extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
+        setContentView(R.layout.homeview);
     }
 }

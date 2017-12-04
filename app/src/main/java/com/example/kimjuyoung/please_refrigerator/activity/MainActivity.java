@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
     }
     @OnClick(R.id.btn_add)
     public void Input(View v){//+버튼의 동작
-        Intent input = new Intent(MainActivity.this, InputData.class);
+        Intent input = new Intent(MainActivity.this, ListActivity.class);
         startActivity(input);
         finish();
     }
