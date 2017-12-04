@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -77,6 +78,9 @@ public class Show extends Fragment implements View.OnClickListener{
             btn_meats.addElement(new Button(getActivity()));
             btn_meats.elementAt(i).setText(meat_info.get(i).name);
             btn_meats.elementAt(i).setBackgroundResource(R.drawable.img_meat);
+            btn_meats.elementAt(i).setTextSize(20);
+            btn_meats.elementAt(i).setTypeface(Typeface.DEFAULT_BOLD);
+            btn_meats.elementAt(i).setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM);
             meatList.addView(btn_meats.elementAt(i));
             btn_meats.elementAt(i).setId(100+i);
             btn_meats.elementAt(i).setOnClickListener(this);
@@ -87,7 +91,8 @@ public class Show extends Fragment implements View.OnClickListener{
             btn_vegetables.addElement(new Button(getActivity()));
             btn_vegetables.elementAt(i).setText(vege_info.get(i).name);
             btn_vegetables.elementAt(i).setBackgroundResource(R.drawable.img_vegetable);
-            btn_vegetables.elementAt(i).setTextSize(18);
+            btn_vegetables.elementAt(i).setTextSize(20);
+            btn_vegetables.elementAt(i).setTypeface(Typeface.DEFAULT_BOLD);
             btn_vegetables.elementAt(i).setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM);
             vegetableList.addView(btn_vegetables.elementAt(i));
             btn_vegetables.elementAt(i).setId(200+i);
@@ -99,6 +104,9 @@ public class Show extends Fragment implements View.OnClickListener{
             btn_etcs.addElement(new Button(getActivity()));
             btn_etcs.elementAt(i).setText(etc_info.get(i).name);
             btn_etcs.elementAt(i).setBackgroundResource(R.drawable.img_etc);
+            btn_etcs.elementAt(i).setTextSize(20);
+            btn_etcs.elementAt(i).setTypeface(Typeface.DEFAULT_BOLD);
+            btn_etcs.elementAt(i).setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM);
             etcList.addView(btn_etcs.elementAt(i));
             btn_etcs.elementAt(i).setId(300+i);
             btn_etcs.elementAt(i).setOnClickListener(this);
