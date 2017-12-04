@@ -16,16 +16,13 @@ import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
 
-    ArrayList<String> name = new ArrayList<String>(0);
-    ArrayList<String> date = new ArrayList<String>(0);
-    ArrayList<Integer> category = new ArrayList<Integer>(0);
+    List_Adapter adapter;
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_recipe);
         ListView listview ;
-        List_Adapter adapter;
 
         // Adapter 생성
         adapter = new List_Adapter() ;
@@ -34,6 +31,11 @@ public class ListActivity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
 
+        input();
+
+    }
+
+    public void input(){
         // 첫 번째 아이템 추가.
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.frozen),"aaa", "aaa") ;
         // 두 번째 아이템 추가.
@@ -41,13 +43,5 @@ public class ListActivity extends AppCompatActivity {
         // 세 번째 아이템 추가.
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.frozen),"ccc", "ccc") ;
 
-
-
-    }
-
-    public void input(){
-        name.add("돼지고기");
-        date.add("2017.12.13");
-        category.add(1);
     }
 }
