@@ -3,6 +3,7 @@ package com.example.kimjuyoung.please_refrigerator.activity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -50,6 +51,14 @@ public class ListActivity extends AppCompatActivity {
     }
     @OnClick(R.id.recipe)
     public void recipe_button(View v){
-        Toast.makeText(this,"aaa",Toast.LENGTH_LONG).show();
+        String a = new String();
+        SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
+        if(checkedItems.get(0)==true)
+            a = "1";
+        if(checkedItems.get(1)==true)
+            a = a + "2";
+        if(checkedItems.get(2)==true)
+            a= a+"3";
+        Toast.makeText(this,a,Toast.LENGTH_LONG).show();
     }
 }
