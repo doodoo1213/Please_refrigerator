@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
  * Created by 이재연 on 2017-12-04.
  */
 
-public class list_item {
+public class list_item { //리스트 뷰 하나가 갖고 있을 data
     private String name ;
     private String date ;
     private Drawable iconDrawable ;
@@ -30,5 +30,4 @@ public class list_item {
     public String getDate() {
         return this.date ;
     }
-
 }
