@@ -1,62 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center|center_vertical"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:weightSum="4">
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="이름"
+                android:textColor="@color/colorPrimary" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="115dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="이름"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_weight="1.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="유통기한"
+                android:textColor="@color/colorPrimary" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_height="40dp"
+                    android:layout_width="40dp"
+                    app:srcCompat="@drawable/refrigerator"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_height="40dp"
+                    android:layout_width="40dp"
+                    app:srcCompat="@drawable/success" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="170dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView3"
-        android:text="유통기한"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp" />
+            </LinearLayout>
+        </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView6"
-        app:srcCompat="@drawable/refrigerator" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/imageView"
-        app:srcCompat="@drawable/success" />
-
-    <Button
-        android:id="@+id/recipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/imageView2"
-        android:layout_alignParentBottom="true"
-        android:text="Button" />
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/recipe"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
         android:choiceMode="multipleChoice"
         />
-</RelativeLayout>
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"/>
+
+</FrameLayout>
