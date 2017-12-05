@@ -16,9 +16,11 @@ import android.widget.LinearLayout;
 
 import com.example.kimjuyoung.please_refrigerator.R;
 
+
 import java.util.ArrayList;
 import java.util.Vector;
 
+import com.example.kimjuyoung.please_refrigerator.models.dump;
 
 public class Show extends Fragment implements View.OnClickListener{
     ArrayList<Food_info> meat_info = new ArrayList<Food_info>(0);
@@ -28,6 +30,21 @@ public class Show extends Fragment implements View.OnClickListener{
     LinearLayout meatList;
     LinearLayout vegetableList;
     LinearLayout etcList;
+
+    ArrayList<String> category0_meat_name = new ArrayList<String>();
+
+    dump category0_meat = new dump("냉장", "고기");
+    /*dump category0_vege = new dump("냉장", "채소");
+    dump category0_etc = new dump("냉장", "기타");
+
+    dump category1_meat = new dump("냉동", "고기");
+    dump category1_vege = new dump("냉동", "채소");
+    dump category1_etc = new dump("냉동", "기타");
+
+    dump category2_meat = new dump("상온", "고기");
+    dump category2_vege = new dump("상온", "채소");
+    dump category2_etc = new dump("상온", "기타");*/
+
 
     int category;
 
@@ -55,19 +72,25 @@ public class Show extends Fragment implements View.OnClickListener{
         return layout;
     }
     private void input_data(){
-        if(category == 2)
-        meat_info.add(new Food_info("Beef", "2015.01.01"));
-        meat_info.add(new Food_info("Meat", "2015.01.02"));
 
-        vege_info.add(new Food_info("토마토", "2015.01.01"));
+       // category0_meat_name = category0_meat.getName_list();
+        String a =  category0_meat.getTuple() + "";
 
-        if(category == 1)
-        etc_info.add(new Food_info("egg", "2015.01.01"));
-        etc_info.add(new Food_info("egg2", "2015.01.02"));
-        etc_info.add(new Food_info("egg3", "2015.01.02"));
-        if(category == 3)
-        etc_info.add(new Food_info("egg4", "2015.01.02"));
-        etc_info.add(new Food_info("egg5", "2015.01.02"));
+
+
+        meat_info.add(new Food_info("aaa", a));
+
+            vege_info.add(new Food_info("토마토", "2015.01.01"));
+
+        if(category == 1) {
+            etc_info.add(new Food_info("egg1", "2015.01.01"));
+            etc_info.add(new Food_info("egg2", "2015.01.02"));
+            etc_info.add(new Food_info("egg3", "2015.01.02"));
+        }
+        if(category == 2) {
+            etc_info.add(new Food_info("egg4", "2015.01.02"));
+            etc_info.add(new Food_info("egg5", "2015.01.02"));
+        }
     }
     private void initList() {
         input_data();
