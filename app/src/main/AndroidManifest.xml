@@ -29,6 +29,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.activity_homeview"/>
     </application>
 
 </manifest>

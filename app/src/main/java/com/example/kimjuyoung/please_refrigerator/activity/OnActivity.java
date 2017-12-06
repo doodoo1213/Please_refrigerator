@@ -23,7 +23,7 @@ public class OnActivity extends AppCompatActivity{
             public void run() {
                 try {
                     sleep(3000);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), activity_homeview.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {

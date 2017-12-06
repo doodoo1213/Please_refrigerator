@@ -178,7 +178,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     }
 
     public void Return(View v){//버튼의 동작
-        Intent home = new Intent(InputData.this, MainActivity.class);
+        Intent home = new Intent(InputData.this, activity_homeview.class);
         startActivity(home);
         finish();
     }

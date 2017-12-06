@@ -1,10 +1,12 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,11 +18,10 @@ import android.widget.LinearLayout;
 
 import com.example.kimjuyoung.please_refrigerator.R;
 
-
 import java.util.ArrayList;
 import java.util.Vector;
 
-import com.example.kimjuyoung.please_refrigerator.models.dump;
+import com.example.kimjuyoung.please_refrigerator.models.Select;
 
 public class Show extends Fragment implements View.OnClickListener{
     ArrayList<Food_info> meat_info = new ArrayList<Food_info>(0);
@@ -31,20 +32,7 @@ public class Show extends Fragment implements View.OnClickListener{
     LinearLayout vegetableList;
     LinearLayout etcList;
 
-    ArrayList<String> category0_meat_name = new ArrayList<String>();
-
-    dump category0_meat = new dump("냉장", "고기");
-    /*dump category0_vege = new dump("냉장", "채소");
-    dump category0_etc = new dump("냉장", "기타");
-
-    dump category1_meat = new dump("냉동", "고기");
-    dump category1_vege = new dump("냉동", "채소");
-    dump category1_etc = new dump("냉동", "기타");
-
-    dump category2_meat = new dump("상온", "고기");
-    dump category2_vege = new dump("상온", "채소");
-    dump category2_etc = new dump("상온", "기타");*/
-
+    ArrayList<String> name;
 
     int category;
 
@@ -59,7 +47,9 @@ public class Show extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        name = new Select().get("냉장", "고기");
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -74,18 +64,20 @@ public class Show extends Fragment implements View.OnClickListener{
     private void input_data(){
 
        // category0_meat_name = category0_meat.getName_list();
-        String a =  category0_meat.getTuple() + "";
 
-
-
-        meat_info.add(new Food_info("aaa", a));
+        for(int i=0; i<name.size();i++){
+            meat_info.add(new Food_info(name.get(i), ""));
+        }
 
             vege_info.add(new Food_info("토마토", "2015.01.01"));
+            vege_info.add(new Food_info("양상추", "2017.12.06"));
 
         if(category == 1) {
-            etc_info.add(new Food_info("egg1", "2015.01.01"));
-            etc_info.add(new Food_info("egg2", "2015.01.02"));
-            etc_info.add(new Food_info("egg3", "2015.01.02"));
+            etc_info.add(new Food_info("계란", "2015.01.01"));
+            etc_info.add(new Food_info("우유", "2015.01.02"));
+            etc_info.add(new Food_info("주스", "2015.01.02"));
+            etc_info.add(new Food_info("치즈", "2017.12.10"));
+            etc_info.add(new Food_info("딸기잼", "2018.01.02"));
         }
         if(category == 2) {
             etc_info.add(new Food_info("egg4", "2015.01.02"));
@@ -168,4 +160,6 @@ public class Show extends Fragment implements View.OnClickListener{
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
+
+
     }
