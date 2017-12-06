@@ -1,13 +1,14 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
+
 import com.example.kimjuyoung.please_refrigerator.R;
 
-import java.util.ArrayList;
 
 
 /**
@@ -17,12 +18,12 @@ import java.util.ArrayList;
 public class ListActivity extends AppCompatActivity {
 
     List_Adapter adapter;
-
+    ListView listview ;
+    FloatingActionButton goto_recipe;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_recipe);
-        ListView listview ;
 
         // Adapter 생성
         adapter = new List_Adapter() ;
@@ -30,6 +31,11 @@ public class ListActivity extends AppCompatActivity {
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
+
+        goto_recipe = (FloatingActionButton) findViewById(R.id.recipe);
+
+        // 이벤트 적용
+
 
         input();
 
@@ -42,6 +48,5 @@ public class ListActivity extends AppCompatActivity {
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.refrigerated), "bbb", "bb") ;
         // 세 번째 아이템 추가.
         adapter.addItem(ContextCompat.getDrawable(this, R.drawable.frozen),"ccc", "ccc") ;
-
     }
 }
