@@ -16,4 +16,13 @@ public class Select_info {
         amount = item_amount;
         memo = item_memo;
     }
+
+    public String getName(){ return name; }
+
+    public String getLife(){return life;}
+
+    public Integer getAmount(){return amount;}
+
+    public String getMemo(){return memo;}
+
 }

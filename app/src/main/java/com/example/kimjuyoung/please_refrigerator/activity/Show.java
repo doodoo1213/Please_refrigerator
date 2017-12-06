@@ -67,7 +67,7 @@ public class Show extends Fragment implements View.OnClickListener{
        // category0_meat_name = category0_meat.getName_list();
 
         for(int i=0; i<refrigerated_list.size();i++){
-            //meat_info.add(new Food_info(refrigerated_list.getClass(), ""));
+            meat_info.add(new Food_info(refrigerated_list.get(i).getName(), refrigerated_list.get(i).getLife()));
         }
 
             vege_info.add(new Food_info("토마토", "2015.01.01"));
