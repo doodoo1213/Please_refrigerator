@@ -1,14 +1,18 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseBooleanArray;
+import android.view.View;
 import android.widget.ListView;
-
+import android.widget.Toast;
 
 import com.example.kimjuyoung.please_refrigerator.R;
 
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
@@ -19,11 +23,11 @@ public class ListActivity extends AppCompatActivity {
 
     List_Adapter adapter;
     ListView listview ;
-    FloatingActionButton goto_recipe;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_recipe);
+        ButterKnife.bind(this);
 
         // Adapter 생성
         adapter = new List_Adapter() ;
@@ -32,21 +36,29 @@ public class ListActivity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter);
 
-        goto_recipe = (FloatingActionButton) findViewById(R.id.recipe);
-
-        // 이벤트 적용
-
-
         input();
 
     }
-
-    public void input(){
+    //list_ㅣtem추가
+    public void input() {
         // 첫 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.frozen),"aaa", "aaa") ;
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.frozen), "aaa", "aaa");
         // 두 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.refrigerated), "bbb", "bb") ;
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.refrigerated), "bbb", "bb");
         // 세 번째 아이템 추가.
-        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.frozen),"ccc", "ccc") ;
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.frozen), "ccc", "ccc");
+    }
+
+    @OnClick(R.id.recipe)
+    public void recipe_button(View v){ //floating button 동작
+        String a = new String();
+        SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
+        if(checkedItems.get(0)==true)
+            a = "1";
+        if(checkedItems.get(1)==true)
+            a = a + "2";
+        if(checkedItems.get(2)==true)
+            a= a+"3";
+        Toast.makeText(this,a,Toast.LENGTH_LONG).show();
     }
 }
