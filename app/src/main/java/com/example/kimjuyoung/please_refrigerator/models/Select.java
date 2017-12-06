@@ -20,8 +20,9 @@ public class Select {
     private final String user = "2017_2_kjy"; // 데이터베이스 user
     private final String pass = "selabkjy"; //데이터베이스 비밀번호
 
-    public ArrayList<String> get(final String space, final String type) {
-        final ArrayList<String> result = new ArrayList<>();
+    public ArrayList<Select_info> get(final String space, final String type) {
+
+        final ArrayList<Select_info> storage_list = new ArrayList<>();
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -43,12 +44,8 @@ public class Select {
                         rs.beforeFirst();
 
                         while (rs.next()) {
-                            result.add(rs.getString(3));
-                            //date.add(rs.getString(4));
-                            //amount.add(rs.getInt(5));
-                            //memo.add(rs.getString(6));
+                            storage_list.add(new Select_info(rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6)));
                         }
-
                         rs.close();
                         stmt.close();
                     }
@@ -68,6 +65,6 @@ public class Select {
             e.printStackTrace();
         }
 
-        return result;
+        return storage_list;
     }
 }

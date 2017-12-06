@@ -30,7 +30,7 @@
         android:layout_alignStart="@+id/refri_icon"
         android:layout_below="@+id/refri_icon"
         android:layout_marginTop="29dp"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@drawable/refrigerator" />
 
     <ImageButton
         android:id="@+id/recipe_icon"

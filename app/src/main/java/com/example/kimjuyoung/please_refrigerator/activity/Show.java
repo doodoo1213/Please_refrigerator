@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import com.example.kimjuyoung.please_refrigerator.models.Select;
+import com.example.kimjuyoung.please_refrigerator.models.Select_info;
 
 public class Show extends Fragment implements View.OnClickListener{
     ArrayList<Food_info> meat_info = new ArrayList<Food_info>(0);
@@ -32,7 +33,7 @@ public class Show extends Fragment implements View.OnClickListener{
     LinearLayout vegetableList;
     LinearLayout etcList;
 
-    ArrayList<String> name;
+    ArrayList<Select_info> refrigerated_list = new ArrayList<>();
 
     int category;
 
@@ -47,7 +48,7 @@ public class Show extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        name = new Select().get("냉장", "고기");
+        refrigerated_list = new Select().get("냉장", "고기");
     }
 
     @Override
@@ -65,8 +66,8 @@ public class Show extends Fragment implements View.OnClickListener{
 
        // category0_meat_name = category0_meat.getName_list();
 
-        for(int i=0; i<name.size();i++){
-            meat_info.add(new Food_info(name.get(i), ""));
+        for(int i=0; i<refrigerated_list.size();i++){
+            //meat_info.add(new Food_info(refrigerated_list.getClass(), ""));
         }
 
             vege_info.add(new Food_info("토마토", "2015.01.01"));
