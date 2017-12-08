@@ -1,12 +1,10 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -33,7 +31,7 @@ public class Show extends Fragment implements View.OnClickListener{
     LinearLayout vegetableList;
     LinearLayout etcList;
 
-    ArrayList<Select_info> refrigerated_list = new ArrayList<>();
+    ArrayList<Select_info> storage_list = new ArrayList<>();
 
     int category;
 
@@ -48,7 +46,7 @@ public class Show extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        refrigerated_list = new Select().get("냉장", "고기");
+        storage_list = new Select().get();
     }
 
     @Override
@@ -66,14 +64,60 @@ public class Show extends Fragment implements View.OnClickListener{
 
        // category0_meat_name = category0_meat.getName_list();
 
-        for(int i=0; i<refrigerated_list.size();i++){
-            meat_info.add(new Food_info(refrigerated_list.get(i).getName(), refrigerated_list.get(i).getLife()));
+        if(category == 0) {
+            for (int i = 0; i < storage_list.size(); i++) {
+                if(storage_list.get(i).getSpace().equals("냉장")) {
+                    switch (storage_list.get(i).getType()) {
+                        case "고기":
+                            meat_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                        case "채소":
+                            vege_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                        case "기타":
+                            etc_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                    }
+                }
+            }
         }
 
-            vege_info.add(new Food_info("토마토", "2015.01.01"));
-            vege_info.add(new Food_info("양상추", "2017.12.06"));
-
         if(category == 1) {
+            for (int i = 0; i < storage_list.size(); i++) {
+                if(storage_list.get(i).getSpace().equals("냉동")) {
+                    switch (storage_list.get(i).getType()) {
+                        case "고기":
+                            meat_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                        case "채소":
+                            vege_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                        case "기타":
+                            etc_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                    }
+                }
+            }
+        }
+
+        if(category == 2) {
+            for (int i = 0; i < storage_list.size(); i++) {
+                if(storage_list.get(i).getSpace().equals("상온")) {
+                    switch (storage_list.get(i).getType()) {
+                        case "고기":
+                            meat_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                        case "채소":
+                            vege_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                        case "기타":
+                            etc_info.add(new Food_info(storage_list.get(i).getName(), storage_list.get(i).getLife(), storage_list.get(i).getAmount(), storage_list.get(i).getMemo()));
+                            break;
+                    }
+                }
+            }
+        }
+        /*if(category == 1) {
             etc_info.add(new Food_info("계란", "2015.01.01"));
             etc_info.add(new Food_info("우유", "2015.01.02"));
             etc_info.add(new Food_info("주스", "2015.01.02"));
@@ -83,7 +127,7 @@ public class Show extends Fragment implements View.OnClickListener{
         if(category == 2) {
             etc_info.add(new Food_info("egg4", "2015.01.02"));
             etc_info.add(new Food_info("egg5", "2015.01.02"));
-        }
+        }*/
     }
     private void initList() {
         input_data();
@@ -148,7 +192,7 @@ public class Show extends Fragment implements View.OnClickListener{
             alertDialogBuilder.setTitle("정보확인");
 
             alertDialogBuilder
-                    .setMessage("이름 : " + food.name + "\n유통기한 : " + food.exp)
+                    .setMessage("이름 : " + food.name + "\n유통기한 : " + food.exp + "\n수량 : " + food.amount + "\n메모 : " + food.memo)
                     .setCancelable(false)
                     .setPositiveButton("확인",
                             new DialogInterface.OnClickListener() {

@@ -34,14 +34,28 @@
         android:layout_marginTop="50dp"
         android:layout_marginBottom="70dp"></android.support.v4.view.ViewPager>
 
-    <Button
-        android:id="@+id/btn_add"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right|bottom"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/home"
+            android:onClick="Input"
+            android:src="@drawable/plus" />
+
+
+        <android.support.design.widget.FloatingActionButton
+        android:id="@+id/home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="end|bottom"
-        android:background="@android:color/transparent"
-        android:drawableTop="@drawable/plus" />
-
+        android:src="@drawable/home_white"
+        android:onClick="Home"
+        android:layout_marginEnd="10dp"/>
+    </RelativeLayout>
 </RelativeLayout>

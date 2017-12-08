@@ -25,19 +25,23 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import butterknife.OnClick;
+
 /**
  * Created by Kim juyoung on 2017-11-28.
  */
 
 public class InputData extends AppCompatActivity implements View.OnClickListener{
 
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
+
     private static final String url = "jdbc:mysql://165.132.221.47:3307/2017_2_kjy"; //서버 역할을 할 ip주소의 사용할 데이터베이스(it_refrigerator)
     private static final String user = "2017_2_kjy"; //it_refrigerator 데이터베이스 user
     private static final String pass = "selabkjy"; //it_refrigerator 데이터베이스 비밀번호
 
     CheckBox type_refrigerated, type_frozen, type_etc;
-    EditText name, date, amount;
-    MultiAutoCompleteTextView memo;
+    EditText name, date, amount, memo;
     Spinner spinner;
     String space = "";
     String query="";
@@ -63,7 +67,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
         name = (EditText) findViewById(R.id.editText);
         date = (EditText) findViewById(R.id.editText2);
         amount = (EditText)findViewById(R.id.editText3);
-        memo = (MultiAutoCompleteTextView) findViewById(R.id.multiAutoCompleteTextView);
+        memo = (EditText) findViewById(R.id.editText4);
         // 각 부분에서 값들을 저장하기 위한 변수들
 
         type_refrigerated.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +114,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
         btnConn(view);
     }
 
+    @OnClick(R.id.success)
     public void btnConn(View view)
     {
         Send objSend = new Send();
@@ -177,9 +182,26 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
         } // 실행 후 msg로 저장한 문자열 알림창으로 보여주기(실패인지, 성공인지)
     }
 
+    @OnClick(R.id.home)
     public void Return(View v){//버튼의 동작
-        Intent home = new Intent(InputData.this, activity_homeview.class);
+        Intent home = new Intent(InputData.this, MainActivity.class);
         startActivity(home);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        if(0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime)
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

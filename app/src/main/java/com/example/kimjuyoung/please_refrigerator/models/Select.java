@@ -20,7 +20,7 @@ public class Select {
     private final String user = "2017_2_kjy"; // 데이터베이스 user
     private final String pass = "selabkjy"; //데이터베이스 비밀번호
 
-    public ArrayList<Select_info> get(final String space, final String type) {
+    public ArrayList<Select_info> get() {
 
         final ArrayList<Select_info> storage_list = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class Select {
                     if (conn == null) {
 
                     } else {
-                        String query = "SELECT * FROM STORAGE WHERE SPACE='" + space + "' AND TYPE='" + type + "' ORDER BY LIFE ASC, AMOUNT DESC";
+                        String query = "SELECT * FROM STORAGE ORDER BY LIFE ASC, AMOUNT DESC";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
 
                         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE); // 쿼리 넣을 준비 함수
@@ -44,7 +44,7 @@ public class Select {
                         rs.beforeFirst();
 
                         while (rs.next()) {
-                            storage_list.add(new Select_info(rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6)));
+                            storage_list.add(new Select_info(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6)));
                         }
                         rs.close();
                         stmt.close();

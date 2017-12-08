@@ -14,6 +14,8 @@
     </string-array>
     <string name="txt_input">추가</string>
     <string name="txt_home">홈</string>
-
+    <string name="main_1">냉장고 열기</string>
+    <string name="main_2">유통기한 목록\n(레시피 검색)</string>
+    <string name="main_3">장바구니 목록</string>
 
 </resources>

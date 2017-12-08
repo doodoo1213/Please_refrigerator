@@ -22,7 +22,8 @@
             <category android:name="android.intent.category.DEFAULT"/>
         </intent-filter>
         </activity>
-        <activity android:name=".activity.ListActivity">
+        <activity android:name=".activity.ListActivity"
+            android:label="레시피 검색">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>

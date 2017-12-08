@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.example.kimjuyoung.please_refrigerator.R;
@@ -17,6 +18,9 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
 {
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
+
     ViewPager vp;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,11 +76,34 @@ public class MainActivity extends AppCompatActivity
             return 3;
         }
     }
-    @OnClick(R.id.btn_add)
+    @OnClick(R.id.input)
     public void Input(View v){//+버튼의 동작
         Intent input = new Intent(MainActivity.this, InputData.class);
         startActivity(input);
         finish();
+    }
+
+    @OnClick(R.id.home)
+    public void Home(View v){
+        Intent home = new Intent(MainActivity.this, activity_homeview.class);
+        startActivity(home);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        if(0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime)
+        {
+            super.onBackPressed();
+        }
+        else
+        {
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
