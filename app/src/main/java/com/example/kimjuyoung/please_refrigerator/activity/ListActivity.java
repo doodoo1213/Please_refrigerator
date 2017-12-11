@@ -16,7 +16,6 @@ import com.example.kimjuyoung.please_refrigerator.models.Select_info;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -79,34 +78,18 @@ public class ListActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.recipe)
-    public void recipe_button(View v) { //floating button 동작
-        String a = new String();
-        String ingredient = "오징어";
+    public void recipe_button(View v){ //floating button 동작
+        String ingredient = "" ;
         SparseBooleanArray checkedItems = listview.getCheckedItemPositions();//체크정보
-        for (int i = 0; i < storage_list.size(); i++) {
-            if (checkedItems.get(i)) {
-                a = a + i;
-                //recipe.add(storage_list.get(i).getName());
-                Intent url = new Intent(Intent.ACTION_VIEW, Uri.parse("http://cook.miznet.daum.net/search/search.do?q='" + ingredient));
-                url.setPackage("com.android.chrome");   // 브라우저가 여러개 인 경우 콕 찍어서 크롬을 지정할 경우
-                startActivity(url);
+        for(int i = 0 ; i < storage_list.size();i++){
+            if(checkedItems.get(i)) {
+                ingredient = ingredient + "+" + adapter.getItem(i).getName();
             }
         }
+        Intent url = new Intent(Intent.ACTION_VIEW, Uri.parse("http://cook.miznet.daum.net/search/search.do?q="+ingredient));
+        url.setPackage("com.android.chrome");   // 브라우저가 여러개 인 경우 콕 찍어서 크롬을 지정할 경우
+        startActivity(url);
     }
-
-    @OnClick(R.id.return_home)
-    public void Return_home(View v){
-        Intent home = new Intent(ListActivity.this, activity_homeview.class);
-        startActivity(home);
-        finish();
-    }
-        /*if(checkedItems.get(0)==true)
-            a = "1";
-        if(checkedItems.get(1)==true)
-            a = a + "2";
-        if(checkedItems.get(2)==true)
-            a= a+"3";
-        Toast.makeText(this,a,Toast.LENGTH_LONG).show();*/
 
     @Override
     public void onBackPressed() {
