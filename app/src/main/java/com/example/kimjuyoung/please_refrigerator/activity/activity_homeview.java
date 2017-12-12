@@ -32,17 +32,17 @@ public class activity_homeview extends AppCompatActivity {
             }
         });
 
-        Button b = findViewById(R.id.recipe_icon);     //레시피선택 목록이동
+        Button b = findViewById(R.id.recipe_icon);     //쇼핑카트 목록이동
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /* Intent intent = new Intent(getApplicationContext(), activity_homeview.class);
+                /*Intent intent = new Intent(getApplicationContext(), SendActivity.class);
                 startActivity(intent);
                 finish();*/
             }
         });
 
-        Button c = findViewById(R.id.cart_icon);     //쇼핑카트 이동
+        Button c = findViewById(R.id.cart_icon);     //레시피 선택 이동
         c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

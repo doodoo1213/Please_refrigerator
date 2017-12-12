@@ -16,24 +16,24 @@ import java.util.ArrayList;
 
 public class Select {
 
-    private final String url = "jdbc:mysql://165.132.221.47:3307/2017_2_kjy"; //서버 역할을 할 ip주소의 사용할 데이터베이스
-    private final String user = "2017_2_kjy"; // 데이터베이스 user
-    private final String pass = "selabkjy"; //데이터베이스 비밀번호
+                        private final String url = "jdbc:mysql://165.132.221.47:3307/2017_2_kjy"; //서버 역할을 할 ip주소의 사용할 데이터베이스
+                        private final String user = "2017_2_kjy"; // 데이터베이스 user
+                        private final String pass = "selabkjy"; //데이터베이스 비밀번호
 
-    public ArrayList<Select_info> get() {
+                        public ArrayList<Select_info> get() {
 
-        final ArrayList<Select_info> storage_list = new ArrayList<>();
+                            final ArrayList<Select_info> storage_list = new ArrayList<>();
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Class.forName("com.mysql.jdbc.Driver"); //mysql 연결
-                    Connection conn = DriverManager.getConnection(url, user, pass); //서버 url로 user와 password사용하여 접속
+                            Thread thread = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Class.forName("com.mysql.jdbc.Driver"); //mysql 연결
+                                        Connection conn = DriverManager.getConnection(url, user, pass); //서버 url로 user와 password사용하여 접속
 
-                    if (conn == null) {
+                                        if (conn == null) {
 
-                    } else {
+                                        } else {
                         String query = "SELECT * FROM STORAGE ORDER BY LIFE ASC, AMOUNT DESC";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
 

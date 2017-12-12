@@ -1,9 +1,11 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import java.util.Vector;
 
 import com.example.kimjuyoung.please_refrigerator.models.Select;
 import com.example.kimjuyoung.please_refrigerator.models.Select_info;
+import com.example.kimjuyoung.please_refrigerator.models.Delete;
 
 public class Show extends Fragment implements View.OnClickListener{
     ArrayList<Food_info> meat_info = new ArrayList<Food_info>(0);
@@ -32,6 +35,7 @@ public class Show extends Fragment implements View.OnClickListener{
     LinearLayout etcList;
 
     ArrayList<Select_info> storage_list = new ArrayList<>();
+    Delete delete = new Delete();
 
     int category;
 
@@ -187,7 +191,9 @@ public class Show extends Fragment implements View.OnClickListener{
         private void Show_info(Food_info  food){
 
             final Context context = getView().getContext();
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+            final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+            final AlertDialog.Builder alertDelete = new AlertDialog.Builder(context);
+
             // 제목셋팅
             alertDialogBuilder.setTitle("정보확인");
 
@@ -201,10 +207,30 @@ public class Show extends Fragment implements View.OnClickListener{
                                     // 다이얼로그를 취소한다
                                     dialog.cancel();
                                 }
-                            });
+                            })
+                    .setNeutralButton("수정",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                        Intent update = new Intent(getContext(), UpdateActivity.class);
+                                        startActivity(update);
+                                    }
+                            })
+                    .setNegativeButton("삭제",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    delete.delete_item("냉장", "meat", "2017-12-10");
+                                    Intent refresh = new Intent(getContext(), MainActivity.class);
+                                    startActivity(refresh);
+                                }
+                            })
+            ;
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
+
+
 
 
     }
