@@ -31,7 +31,6 @@ public class ListActivity extends AppCompatActivity {
     private long backPressedTime = 0;
 
     ArrayList<Select_info> storage_list = new ArrayList<>();
-    ArrayList<String> recipe = new ArrayList<>();
     List_Adapter adapter;
     ListView listview ;
     protected void onCreate(Bundle savedInstanceState)
@@ -91,7 +90,11 @@ public class ListActivity extends AppCompatActivity {
         startActivity(url);
     }
 
-
+    @OnClick(R.id.return_home)
+    public void return_home(View v){
+        Intent home = new Intent(ListActivity.this, activity_homeview.class);
+        startActivity(home);
+    }
 
     @Override
     public void onBackPressed() {

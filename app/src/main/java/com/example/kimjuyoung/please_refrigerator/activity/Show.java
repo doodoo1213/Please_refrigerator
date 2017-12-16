@@ -188,7 +188,7 @@ public class Show extends Fragment implements View.OnClickListener{
             case 3 : Show_info(etc_info.get(index));break;
         }
     }
-        private void Show_info(Food_info  food){
+        private void Show_info(final Food_info  food){
 
             final Context context = getView().getContext();
             final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -220,7 +220,16 @@ public class Show extends Fragment implements View.OnClickListener{
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    delete.delete_item("냉장", "meat", "2017-12-10");
+
+                                    if(category==0) {
+                                        delete.delete_item("냉장", food.name, food.exp);
+                                    }
+                                    else if(category==1){
+                                        delete.delete_item("냉동", food.name, food.exp);
+                                    }
+                                    else if(category==2){
+                                        delete.delete_item("상온", food.name, food.exp);
+                                    }
                                     Intent refresh = new Intent(getContext(), MainActivity.class);
                                     startActivity(refresh);
                                 }
