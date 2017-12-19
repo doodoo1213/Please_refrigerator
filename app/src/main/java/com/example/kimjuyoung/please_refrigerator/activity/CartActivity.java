@@ -1,21 +1,19 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.kimjuyoung.please_refrigerator.R;
 import com.example.kimjuyoung.please_refrigerator.models.Select_cart;
 import com.example.kimjuyoung.please_refrigerator.models.Select_cart_info;
+import com.example.kimjuyoung.please_refrigerator.models.Delete_cart;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,7 +37,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<Select_cart_info> carttable_list = new ArrayList<>();
     Cartlist_Adapter adapter;
     ListView listview ;
-
+    Select_cart Info_cart = new Select_cart();
     EditText cname, camount;
     //ImageButton totaldelete;
 
@@ -53,54 +51,27 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         cname = (EditText) findViewById(R.id.input_cartname);
         camount = (EditText)findViewById(R.id.input_cartamount);
 
-        //ImageButton totaldelete = (ImageButton)findViewById(R.id.all_delete);
-
-//        totaldelete.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//
-//                }
-//            });
-//        };
-
-        // 각 부분에서 값들을 저장하기 위한 변수들
-
+        adapter = new Cartlist_Adapter();
+        // 리스트뷰 참조 및 Adapter달기
+        listview = (ListView) findViewById(R.id.cart_list);
+        listview.setAdapter(adapter);
+        carttable_list = Info_cart.get();
+        input();
     }
 
     public void onClick(View view) {
         btnplus(view);
-        //  btnremove(view);
+        btnremove(view);
     }
-    // 카트테이블의 데이터 삭제
-//    private void btnremove(View view) {
-//        String msg = ""; //알림 띄울 문자열 초기화
-//
-//        try{
-//            Class.forName("com.mysql.jdbc.Driver"); //mysql 연결
-//            Connection conn = DriverManager.getConnection(url, user, pass); //서버 url로 user와 password사용하여 접속
-//            if(conn==null)
-//            {
-//                msg = "Connection goes wrong"; // 연결이 실패했을 때 에러 문자열 msg로 저장
-//            }
-//            else {
-//                if (TextUtils.isEmpty(cname.getText())){
-//                    msg = "이름을 입력해주세요";
-//                }
-//                else {
-//                    query = "DELECT FROM CART";
-//                    // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
-//                    Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
-//                    stmt.executeUpdate(query); // 쿼리 실행
-//                    msg = "입력되었습니다."; // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
-//                }
-//            }
-//            conn.close();
-//        } catch (Exception e) {
-//            msg = ""; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장, 나머지 부분 오류는 앞에서 이미 처리
-//            e.printStackTrace();
-//        }
-//        return msg;
-//    }
+
+    @OnClick(R.id.all_delete)
+    public  void btnremove(View view)
+    {
+        Delete_cart delete = new Delete_cart();
+        delete.delete_item();
+        Intent intent = new Intent(CartActivity.this, CartActivity.class);
+        startActivity(intent);
+    }
 
     @OnClick(R.id.data_plus)
     public void btnplus(View view)
@@ -153,24 +124,15 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(String s) {
             Toast.makeText(CartActivity.this, msg, Toast.LENGTH_LONG).show();
             if(msg.equals("입력되었습니다.")) {
-                adapter = new Cartlist_Adapter();
-                // 리스트뷰 참조 및 Adapter달기
-                listview = (ListView) findViewById(R.id.cart_list);
-                listview.setAdapter(adapter);
-                input();
+                adapter.addcartItem(text_name,item_amount);
             }
         } // 실행 후 msg로 저장한 문자열 알림창으로 보여주기(실패인지, 성공인지)
     }
     //리스트뷰 데이터 보여주기
     public void input() {
-
-        Select_cart Info_cart = new Select_cart();
-        carttable_list = Info_cart.get();
-
         for(int i = 0 ; i < carttable_list.size() ; i ++){
             adapter.addcartItem( carttable_list.get(i).getName(),carttable_list.get(i).getAmount());
         }
-        Toast.makeText(this, carttable_list.get(1).getName()+carttable_list.get(1).getAmount(), Toast.LENGTH_SHORT).show();
 
     }
 

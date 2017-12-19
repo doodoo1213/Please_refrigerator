@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
         android:focusable="true"
+        android:onClick="btnremove"
         android:src="@drawable/delete" />
     </LinearLayout>
     </LinearLayout>
