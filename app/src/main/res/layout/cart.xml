@@ -65,8 +65,8 @@
 
     <ListView
         android:id="@+id/cart_list"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
         android:layout_marginTop="13dp"
         android:layout_width="match_parent"
         android:layout_height="400dp" />

@@ -49,7 +49,7 @@ public class Cartlist_Adapter extends BaseAdapter{
         Cartlist_item cartlistviewpos = cartlist_view.get(pos);
 
         // 아이템 내 각 위젯에 데이터 반영
-        textAmountView.setText(cartlistviewpos.getAmount().toString());
+        textAmountView.setText(cartlistviewpos.getAmount().toString()); //int를 string으로
         textNameView.setText(cartlistviewpos.getName());
         return convertView;
     }

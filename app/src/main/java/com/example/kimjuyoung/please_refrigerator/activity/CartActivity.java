@@ -153,9 +153,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(String s) {
             Toast.makeText(CartActivity.this, msg, Toast.LENGTH_LONG).show();
             if(msg.equals("입력되었습니다.")) {
-
                 adapter = new Cartlist_Adapter();
-
                 // 리스트뷰 참조 및 Adapter달기
                 listview = (ListView) findViewById(R.id.cart_list);
                 listview.setAdapter(adapter);
