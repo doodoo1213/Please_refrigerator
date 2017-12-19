@@ -12,11 +12,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.kimjuyoung.please_refrigerator.R;
+import com.example.kimjuyoung.please_refrigerator.activity.LoginActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -46,6 +46,8 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     String space = "";
     String query="";
     int count = 0;
+
+    LoginActivity refrigerator = new LoginActivity();
 
     public Calendar getCalendar() {
         Date currentDate = new Date();
@@ -124,12 +126,13 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     private class Send extends AsyncTask<String, String, String>
     {
         String msg = ""; //알림 띄울 문자열 초기화
+        String msg1 = "";
         String text_name = name.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
         String text_date = date.getText().toString(); //데이터베이스에 들어갈 입력받은 날짜 string으로 text_date 에 저장
         String text_memo = memo.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
         String item_type = spinner.getSelectedItem().toString();
-        //String item_type = "NULL";
         int item_amount = Integer.parseInt(amount.getText().toString());
+        String table = refrigerator.getRefrigerator();
 
         @Override
         protected void onPreExecute() {
@@ -141,6 +144,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
             try{
                 Class.forName("com.mysql.jdbc.Driver"); //mysql 연결
                 Connection conn = DriverManager.getConnection(url, user, pass); //서버 url로 user와 password사용하여 접속
+                Statement stmt = null;
                 if(conn==null)
                 {
                     msg = "Connection goes wrong"; // 연결이 실패했을 때 에러 문자열 msg로 저장
@@ -156,14 +160,16 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                         msg = "이름을 입력해주세요";
                     }
                     else {
-                        query = "INSERT INTO STORAGE (space, type, name, life, amount, memo) VALUES ('" + space + "', '" + item_type + "', '" + text_name + "', '" + text_date + "', " + item_amount + ",  '" + text_memo + "')";
+                        msg1 = "query";
+                        query = "INSERT INTO"+table+" (space, type, name, life, amount, memo) VALUES ('" + space + "', '" + item_type + "', '" + text_name + "', '" + text_date + "', " + item_amount + ",  '" + text_memo + "')";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
-                        Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
+                        stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
                         stmt.executeUpdate(query); // 쿼리 실행
                         msg = "입력되었습니다."; // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
                     }
                 }
-                conn.close();
+                if(conn!=null) conn.close();
+                if(stmt!=null) stmt.close();
             } catch (Exception e) {
                 msg = "유통기한을 확인해 주세요."; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장, 나머지 부분 오류는 앞에서 이미 처리
                 e.printStackTrace();
@@ -173,6 +179,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
 
         @Override
         protected void onPostExecute(String s) {
+            Toast.makeText(InputData.this, msg1, Toast.LENGTH_LONG).show();
             Toast.makeText(InputData.this, msg, Toast.LENGTH_LONG).show();
             if(msg.equals("입력되었습니다.")) {
                 Intent intent = new Intent(InputData.this, MainActivity.class);

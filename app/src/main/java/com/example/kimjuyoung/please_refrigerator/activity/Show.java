@@ -192,7 +192,6 @@ public class Show extends Fragment implements View.OnClickListener{
 
             final Context context = getView().getContext();
             final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-            final AlertDialog.Builder alertDelete = new AlertDialog.Builder(context);
 
             // 제목셋팅
             alertDialogBuilder.setTitle("정보확인");

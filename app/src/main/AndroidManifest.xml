@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity"/>
-        <activity android:name=".activity.InputData">
+        <activity android:name=".activity.InputData"
+            android:label="물품 입력">
         <intent-filter>
             <action android:name="android.intent.action.INSERT"/>
             <category android:name="android.intent.category.DEFAULT"/>
@@ -45,6 +46,15 @@
         <activity android:name=".activity.CartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.INSERT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.SignUpActivity"
+            android:label="회원가입">
+            <intent-filter>
+                <action android:name="android.intent.action.SYNC"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>

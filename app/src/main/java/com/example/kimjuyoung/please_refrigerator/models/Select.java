@@ -6,10 +6,12 @@ import android.support.v4.app.Fragment;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.example.kimjuyoung.please_refrigerator.activity.LoginActivity;
 /**
  * Created by Kim juyoung on 2017-12-06.
  */
@@ -19,6 +21,10 @@ public class Select {
                         private final String url = "jdbc:mysql://165.132.221.47:3307/2017_2_kjy"; //서버 역할을 할 ip주소의 사용할 데이터베이스
                         private final String user = "2017_2_kjy"; // 데이터베이스 user
                         private final String pass = "selabkjy"; //데이터베이스 비밀번호
+
+                        LoginActivity refrigerator = new LoginActivity();
+                        final boolean result = refrigerator.getResult();
+                        String table = "";
 
                         public ArrayList<Select_info> get() {
 
@@ -34,14 +40,16 @@ public class Select {
                                         if (conn == null) {
 
                                         } else {
-                        String query = "SELECT * FROM STORAGE ORDER BY LIFE ASC, AMOUNT DESC";
+
+                                            if(result) {
+                                               final String table = refrigerator.getRefrigerator();
+                                            }
+                                            String query = "SELECT * FROM '"+table+"' ORDER BY LIFE ASC, AMOUNT DESC";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
 
-                        Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE); // 쿼리 넣을 준비 함수
+                        Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
                         ResultSet rs = stmt.executeQuery(query);// 쿼리 실행
 
-                        rs.last();
-                        rs.beforeFirst();
 
                         while (rs.next()) {
                             storage_list.add(new Select_info(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6)));

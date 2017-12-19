@@ -10,37 +10,30 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-    <Button
+    <ImageButton
         android:id="@+id/refri_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_1"
-        android:fontFamily="@font/mainfont"
+        android:src="@drawable/menu_button1"
         android:gravity="center"
-        android:textSize="20sp"
         android:background="@android:color/transparent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/cart_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_below="@id/refri_icon"
-        android:layout_marginTop="50dp"
-        android:text="@string/main_2"
-        android:fontFamily="@font/mainfont"
-        android:textSize="20sp"
+        android:src="@drawable/menu_button2"
+        android:layout_marginTop="40dp"
         android:background="@android:color/transparent"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/recipe_icon"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/cart_icon"
-        android:layout_marginTop="50dp"
-        android:text="@string/main_3"
-        android:fontFamily="@font/mainfont"
-        android:textSize="20sp"
-        android:gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/menu_button3"
         android:background="@android:color/transparent"/>
     </RelativeLayout>
 </FrameLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="핸드폰 번호"/>
+            <EditText
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_phone"
+                android:hint="010XXXXXXXX"
+                android:layout_marginStart="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="냉장고 이름"/>
+            <EditText
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_name"
+                android:layout_marginStart="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+           android:layout_gravity="center_horizontal">
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/signup"
+            android:onClick="SignUp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/signup"
+            android:layout_marginTop="30dp"/>
+
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:id="@+id/login"
+                android:onClick="Login"
+                android:background="@android:color/transparent"
+                android:src="@drawable/login"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

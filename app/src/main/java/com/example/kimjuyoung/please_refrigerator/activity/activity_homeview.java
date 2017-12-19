@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
+
 import com.example.kimjuyoung.please_refrigerator.R;
 
 /**
@@ -20,7 +21,7 @@ public class activity_homeview extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         setContentView(R.layout.homeview);
 
-        Button a = (Button)findViewById(R.id.refri_icon);      //냉장고 화면이동
+        ImageButton a = (ImageButton)findViewById(R.id.refri_icon);      //냉장고 화면이동
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,7 +31,7 @@ public class activity_homeview extends AppCompatActivity {
             }
         });
 
-        Button b = (Button)findViewById(R.id.recipe_icon);     //쇼핑카트 목록이동
+        ImageButton b = (ImageButton) findViewById(R.id.recipe_icon);     //쇼핑카트 목록이동
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,7 +41,7 @@ public class activity_homeview extends AppCompatActivity {
             }
         });
 
-        Button c = (Button)findViewById(R.id.cart_icon);     //레시피 선택 이동
+        ImageButton c = (ImageButton) findViewById(R.id.cart_icon);     //레시피 선택 이동
         c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
