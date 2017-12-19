@@ -1,12 +1,15 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -49,6 +52,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         cname = (EditText) findViewById(R.id.input_cartname);
         camount = (EditText)findViewById(R.id.input_cartamount);
+
         //ImageButton totaldelete = (ImageButton)findViewById(R.id.all_delete);
 
 //        totaldelete.setOnClickListener(new View.OnClickListener(){
@@ -97,8 +101,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 //        return msg;
 //    }
-
-
 
     @OnClick(R.id.data_plus)
     public void btnplus(View view)
@@ -151,15 +153,13 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(String s) {
             Toast.makeText(CartActivity.this, msg, Toast.LENGTH_LONG).show();
             if(msg.equals("입력되었습니다.")) {
-                adapter = new Cartlist_Adapter() ;
+
+                adapter = new Cartlist_Adapter();
 
                 // 리스트뷰 참조 및 Adapter달기
                 listview = (ListView) findViewById(R.id.cart_list);
                 listview.setAdapter(adapter);
                 input();
-                Intent intent = new Intent(CartActivity.this, CartActivity.class);
-                startActivity(intent);
-                finish();
             }
         } // 실행 후 msg로 저장한 문자열 알림창으로 보여주기(실패인지, 성공인지)
     }

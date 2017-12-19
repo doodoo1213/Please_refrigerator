@@ -46,10 +46,10 @@ public class Cartlist_Adapter extends BaseAdapter{
         TextView textAmountView = (TextView) convertView.findViewById(R.id.cart_itemnumbers) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        Cartlist_item cartlistviewpos = cartlist_view.get(position);
+        Cartlist_item cartlistviewpos = cartlist_view.get(pos);
 
         // 아이템 내 각 위젯에 데이터 반영
-        textAmountView.setText(cartlistviewpos.getAmount());
+        textAmountView.setText(cartlistviewpos.getAmount().toString());
         textNameView.setText(cartlistviewpos.getName());
         return convertView;
     }
