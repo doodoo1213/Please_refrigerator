@@ -17,28 +17,47 @@ import java.text.SimpleDateFormat;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    CheckBox space; //check돼있는 상태 받아와서 그대로 체크 돼 있도록
+    CheckBox type_refrigerated, type_frozen, type_etc;
     Spinner type;
     EditText name, date, amount, memo;
-
+    static int old_type;//육류/야채/기타, 1/2/3
+    static String old_name;
+    static String old_date;
+    static int old_amount;
+    static String old_memo;
+    static int old_category;//냉장/냉동/상온 , 1/2/3
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
 
-        type = (Spinner)findViewById(R.id.spinner);
-        name = (EditText)findViewById(R.id.editText);
-        date = (EditText)findViewById(R.id.editText2);
-        amount = (EditText)findViewById(R.id.editText3);
-        memo = (EditText)findViewById(R.id.editText4);
+        type_refrigerated = (CheckBox) findViewById(R.id.checkBox1);
+        type_frozen = (CheckBox) findViewById(R.id.checkBox2);
+        type_etc = (CheckBox) findViewById(R.id.checkBox3);
+        type = (Spinner) findViewById(R.id.spinner);
+        name = (EditText) findViewById(R.id.editText);
+        date = (EditText) findViewById(R.id.editText2);
+        amount = (EditText) findViewById(R.id.editText3);
+        memo = (EditText) findViewById(R.id.editText4);
 
-    /*    name.setText("오징어");
+        //넘겨받은 데이터는 미리 입력시켜둠
+        name.setText(old_name);//이름
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        date.setText(dateFormat.format("2018/2/4"));
-        amount.setText("5");
-        memo.setText("memo");*/
+        date.setText(dateFormat.format(old_date));//날짜
+        amount.setText(old_amount);//양
+        memo.setText(old_memo);//메모
+        //저장소 체크박스
+        if (old_category == 1) {
+            type_refrigerated.setChecked(true);
+        }
+        if (old_category == 2) {
+            type_frozen.setChecked(true);
+        }
+        if (old_category == 3) {
+            type_etc.setChecked(true);
+        }
+        //타입 스피너 아직은 미완성
+        type.setGravity(2);
     }
-
-
 }

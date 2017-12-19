@@ -56,7 +56,6 @@ public class Show extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
         View layout = (View) inflater.inflate(R.layout.storage, container, false);
         meatList = (LinearLayout) layout.findViewById(R.id.list_meat);
         vegetableList = (LinearLayout) layout.findViewById(R.id.list_vegetable);
@@ -65,9 +64,6 @@ public class Show extends Fragment implements View.OnClickListener{
         return layout;
     }
     private void input_data(){
-
-       // category0_meat_name = category0_meat.getName_list();
-
         if(category == 0) {
             for (int i = 0; i < storage_list.size(); i++) {
                 if(storage_list.get(i).getSpace().equals("냉장")) {
@@ -121,17 +117,7 @@ public class Show extends Fragment implements View.OnClickListener{
                 }
             }
         }
-        /*if(category == 1) {
-            etc_info.add(new Food_info("계란", "2015.01.01"));
-            etc_info.add(new Food_info("우유", "2015.01.02"));
-            etc_info.add(new Food_info("주스", "2015.01.02"));
-            etc_info.add(new Food_info("치즈", "2017.12.10"));
-            etc_info.add(new Food_info("딸기잼", "2018.01.02"));
-        }
-        if(category == 2) {
-            etc_info.add(new Food_info("egg4", "2015.01.02"));
-            etc_info.add(new Food_info("egg5", "2015.01.02"));
-        }*/
+
     }
     private void initList() {
         input_data();
@@ -183,12 +169,12 @@ public class Show extends Fragment implements View.OnClickListener{
         index = v.getId()%100; //버튼의 분류
 
         switch(v.getId()/100){ //category의 분류
-            case 1 : Show_info(meat_info.get(index));break;
-            case 2 : Show_info(vege_info.get(index));break;
-            case 3 : Show_info(etc_info.get(index));break;
+            case 1 : Show_info(meat_info.get(index),1);break;
+            case 2 : Show_info(vege_info.get(index),2);break;
+            case 3 : Show_info(etc_info.get(index),3);break;
         }
     }
-        private void Show_info(final Food_info  food){
+        private void Show_info(final Food_info  food,int type){
 
             final Context context = getView().getContext();
             final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -212,6 +198,11 @@ public class Show extends Fragment implements View.OnClickListener{
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                         Intent update = new Intent(getContext(), UpdateActivity.class);
+                                        UpdateActivity.old_name = food.name;
+                                        UpdateActivity.old_amount = food.amount;
+                                        UpdateActivity.old_category = category;
+                                        UpdateActivity.old_memo = food.memo;
+                                        UpdateActivity.old_date = food.exp;
                                         startActivity(update);
                                     }
                             })
@@ -237,8 +228,4 @@ public class Show extends Fragment implements View.OnClickListener{
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
-
-
-
-
     }
