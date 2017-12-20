@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import butterknife.OnClick;
+
 /**
  * Created by Kim juyoung on 2017-12-18.
  */
@@ -51,6 +53,12 @@ public class SignUpActivity extends AppCompatActivity {
         objSend.execute("");
     }
 
+    @OnClick(R.id.homehome)
+    public void homehome(View v){
+        Intent home = new Intent(SignUpActivity.this, LoginActivity.class);
+        startActivity(home);
+        finish();
+    }
     private class Send extends AsyncTask<String, String, String>
     {
         String msg = ""; //알림 띄울 문자열 초기화
@@ -80,14 +88,6 @@ public class SignUpActivity extends AppCompatActivity {
                 else {
                         query1 = "SELECT REFRIGERATOR FROM USER WHERE PHONE = '"+text_phone+"'";
                         query2 = "INSERT INTO USER VALUES ('"+text_phone+"', '"+text_refrigerator+"')";
-                        query3 = "CREATE TABLE "+text_refrigerator+
-                                "(space varchar(20) not null," +
-                                "type varchar(20) not null," +
-                                "name varchar(50) not null," +
-                                "life date not null," +
-                                "amount int(11) default 1," +
-                                "memo varchar(300) default null," +
-                                "primary key (name, life))";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
                         stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
                         rs = stmt.executeQuery(query1);
@@ -104,7 +104,6 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                         else {
                             stmt.executeUpdate(query2); // 쿼리 실행
-                            stmt.executeUpdate(query3);
                             msg = "등록되었습니다."; // 데이터베이스에 데이터가 잘 들어갔을 때 성공 문자열 msg로 저장
                         }
                 }

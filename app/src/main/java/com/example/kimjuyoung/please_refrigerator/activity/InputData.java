@@ -103,7 +103,7 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
             count++;
         }
         if(type_etc.isChecked()) {
-            space = "기타";
+            space = "상온";
             count++;
         }
         return space;

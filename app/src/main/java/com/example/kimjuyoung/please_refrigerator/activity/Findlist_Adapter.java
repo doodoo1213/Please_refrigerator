@@ -70,4 +70,8 @@ public class Findlist_Adapter extends BaseAdapter{
     public void addList(String refrigerator) {
         listViewItemList.add(refrigerator);
     }
+    public void data_clear(){
+        listViewItemList.clear();
+    }
+
 }

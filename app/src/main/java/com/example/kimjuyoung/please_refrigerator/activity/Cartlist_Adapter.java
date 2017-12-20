@@ -55,12 +55,11 @@ public class Cartlist_Adapter extends BaseAdapter{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked == true) {
-                    textAmountView.setTextColor(Color.parseColor("#BDBDBD"));
-                    textNameView.setTextColor(Color.parseColor("#BDBDBD"));
-
-                }else{
                     textAmountView.setTextColor(Color.parseColor("#000000"));
                     textNameView.setTextColor(Color.parseColor("#000000"));
+                }else{
+                    textAmountView.setTextColor(Color.parseColor("#BDBDBD"));
+                    textNameView.setTextColor(Color.parseColor("#BDBDBD"));
 
                 }
             }

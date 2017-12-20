@@ -1,5 +1,6 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -45,7 +46,10 @@ public class FindActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find);
 
         phone = (EditText) findViewById(R.id.search_phone);
-
+        adapter = new Findlist_Adapter();
+        // 리스트뷰 참조 및 Adapter달기
+        listview = (ListView) findViewById(R.id.ref_list);
+        listview.setAdapter(adapter);
     }
 
     @OnClick(R.id.find_ref)
@@ -54,13 +58,21 @@ public class FindActivity extends AppCompatActivity {
         objSelect.execute("");
     }
 
+    @OnClick(R.id.gohome)
+    public void gohome(View v){
+        Intent gohome = new Intent(FindActivity.this, LoginActivity.class);
+        startActivity(gohome);
+        finish();
+    }
+
     private class Select extends AsyncTask<String, String, String> {
-        String msg = ""; //알림 띄울 문자열 초기화
+        String msg = "검색 완료"; //알림 띄울 문자열 초기화
         String search_phone = phone.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            findlist.clear();
         } //save 누르기 전에 실행할 부분, 우리는 없으니까 딱히 뭐 안적음.
 
         @Override
@@ -88,7 +100,7 @@ public class FindActivity extends AppCompatActivity {
                     conn.close();
                 }
             } catch (Exception e) {
-                msg = ""; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장, 나머지 부분 오류는 앞에서 이미 처리
+                msg = "ERROR"; // 연결이 안됐거나, 쿼리문 실행에서 오류가 났을 경우 에러 문자열 msg로 저장, 나머지 부분 오류는 앞에서 이미 처리
                 e.printStackTrace();
             }
             return msg;
@@ -97,17 +109,15 @@ public class FindActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(FindActivity.this, msg, Toast.LENGTH_LONG).show();
-            adapter = new Findlist_Adapter();
-            // 리스트뷰 참조 및 Adapter달기
-            listview = (ListView) findViewById(R.id.cart_list);
-            listview.setAdapter(adapter);
             input();
         }
     }
         //리스트뷰 데이터 보여주기
         public void input() {
+       adapter.data_clear();
         for(int i = 0; i<findlist.size(); i++) {
             adapter.addList(findlist.get(i));
         }
+        listview.invalidateViews();
         }
 }

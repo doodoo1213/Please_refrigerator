@@ -137,6 +137,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(CartActivity.this, msg, Toast.LENGTH_LONG).show();
             if(msg.equals("입력되었습니다.")) {
                 adapter.addcartItem(text_name,item_amount);
+                listview.invalidateViews();
             }
         } // 실행 후 msg로 저장한 문자열 알림창으로 보여주기(실패인지, 성공인지)
     }
@@ -145,7 +146,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         for(int i = 0 ; i < carttable_list.size() ; i ++){
             adapter.addcartItem( carttable_list.get(i).getName(),carttable_list.get(i).getAmount());
         }
-
     }
 
     @OnClick(R.id.gotohome)

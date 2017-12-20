@@ -8,6 +8,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/findlist"
         android:text="List"
+        android:textSize="20sp"
+        android:textColor="#000000"
         android:textAlignment="center"
         android:layout_marginTop="20dp"/>
 
