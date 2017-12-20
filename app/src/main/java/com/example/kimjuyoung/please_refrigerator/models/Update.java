@@ -1,27 +1,25 @@
 package com.example.kimjuyoung.please_refrigerator.models;
 
 import com.example.kimjuyoung.please_refrigerator.activity.LoginActivity;
+import com.example.kimjuyoung.please_refrigerator.activity.UpdateActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
- * Created by Kim juyoung on 2017-12-12.
+ * Created by Kim juyoung on 2017-12-20.
  */
 
-public class Delete {
+public class Update {
 
     private final String url = "jdbc:mysql://165.132.221.47:3307/2017_2_kjy"; //서버 역할을 할 ip주소의 사용할 데이터베이스
     private final String user = "2017_2_kjy"; // 데이터베이스 user
     private final String pass = "selabkjy"; //데이터베이스 비밀번호
 
-    public void delete_item(final String space, final String name, final String life) {
+    public void update_item(final String space, final String life, final int amount, final String memo) {
 
-
+        final String name = UpdateActivity.old_name;
         final String phone = LoginActivity.login_p;
         final String refrigerator = LoginActivity.login_ref;
 
@@ -37,15 +35,17 @@ public class Delete {
                     if (conn == null) {
 
                     } else {
-                        String query = "DELETE FROM STORAGE WHERE SPACE=? AND NAME=? AND LIFE=? AND PHONE=? AND REFRIGERATOR=?";
+                        String query = "UPDATE STORAGE SET SPACE=?, LIFE=?, AMOUNT=?, MEMO=? WHERE NAME=? AND PHONE=? AND REFRIGERATOR=?";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
 
                         preparedStatement = conn.prepareStatement(query);
                         preparedStatement.setString(1, space);
-                        preparedStatement.setString(2, name);
-                        preparedStatement.setString(3, life);
-                        preparedStatement.setString(4, phone);
-                        preparedStatement.setString(5, refrigerator);
+                        preparedStatement.setString(2, life);
+                        preparedStatement.setInt(3, amount);
+                        preparedStatement.setString(4, memo);
+                        preparedStatement.setString(5, name);
+                        preparedStatement.setString(6, phone);
+                        preparedStatement.setString(7, refrigerator);
 
                         preparedStatement.executeUpdate();
                     }

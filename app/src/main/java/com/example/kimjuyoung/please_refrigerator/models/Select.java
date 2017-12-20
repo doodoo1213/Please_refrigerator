@@ -17,9 +17,9 @@ public class Select {
                         private final String user = "2017_2_kjy"; // 데이터베이스 user
                         private final String pass = "selabkjy"; //데이터베이스 비밀번호
 
-                        LoginActivity refrigerator = new LoginActivity();
-                        final boolean result = refrigerator.getResult();
-                        String table = "";
+
+                        String phone = LoginActivity.login_p;
+                        String refrigerator = LoginActivity.login_ref;
 
                         public ArrayList<Select_info> get() {
 
@@ -36,10 +36,7 @@ public class Select {
 
                                         } else {
 
-                                            if(result) {
-                                               final String table = refrigerator.getRefrigerator();
-                                            }
-                                            String query = "SELECT * FROM '"+table+"' ORDER BY LIFE ASC, AMOUNT DESC";
+                                            String query = "SELECT * FROM STORAGE WHERE PHONE='"+phone+"' AND REFRIGERATOR='"+refrigerator+"'ORDER BY LIFE ASC, AMOUNT DESC";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
 
                         Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수

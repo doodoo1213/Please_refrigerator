@@ -74,6 +74,7 @@
 </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/gotohome"
+        android:onClick="gotohome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"

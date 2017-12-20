@@ -16,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.kimjuyoung.please_refrigerator.R;
-import com.example.kimjuyoung.please_refrigerator.activity.LoginActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -46,8 +45,6 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     String space = "";
     String query="";
     int count = 0;
-
-    LoginActivity refrigerator = new LoginActivity();
 
     public Calendar getCalendar() {
         Date currentDate = new Date();
@@ -126,13 +123,13 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
     private class Send extends AsyncTask<String, String, String>
     {
         String msg = ""; //알림 띄울 문자열 초기화
-        String msg1 = "";
         String text_name = name.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
         String text_date = date.getText().toString(); //데이터베이스에 들어갈 입력받은 날짜 string으로 text_date 에 저장
         String text_memo = memo.getText().toString(); //데이터베이스에 들어갈 입력받은 이름 string으로 text_name 에 저장
         String item_type = spinner.getSelectedItem().toString();
         int item_amount = Integer.parseInt(amount.getText().toString());
-        String table = refrigerator.getRefrigerator();
+        String phone = LoginActivity.login_p;
+        String refrigerator = LoginActivity.login_ref;
 
         @Override
         protected void onPreExecute() {
@@ -160,8 +157,8 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
                         msg = "이름을 입력해주세요";
                     }
                     else {
-                        msg1 = "query";
-                        query = "INSERT INTO"+table+" (space, type, name, life, amount, memo) VALUES ('" + space + "', '" + item_type + "', '" + text_name + "', '" + text_date + "', " + item_amount + ",  '" + text_memo + "')";
+                        //(space, type, name, life, amount, memo, phone, refrigerator)
+                        query = "INSERT INTO STORAGE VALUES ('" + space + "', '" + item_type + "', '" + text_name + "', '" + text_date + "', " + item_amount + ",  '" + text_memo + "', '"+phone+"', '"+refrigerator+"')";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
                         stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
                         stmt.executeUpdate(query); // 쿼리 실행
@@ -179,7 +176,6 @@ public class InputData extends AppCompatActivity implements View.OnClickListener
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(InputData.this, msg1, Toast.LENGTH_LONG).show();
             Toast.makeText(InputData.this, msg, Toast.LENGTH_LONG).show();
             if(msg.equals("입력되었습니다.")) {
                 Intent intent = new Intent(InputData.this, MainActivity.class);

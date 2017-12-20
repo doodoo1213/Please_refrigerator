@@ -21,12 +21,15 @@ public class MainActivity extends AppCompatActivity
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
+    String refrigerator = LoginActivity.login_ref;
+
     ViewPager vp;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle(refrigerator);
         ButterKnife.bind(this);                 // using ButterKnife
 
         vp = (ViewPager)findViewById(R.id.vp);

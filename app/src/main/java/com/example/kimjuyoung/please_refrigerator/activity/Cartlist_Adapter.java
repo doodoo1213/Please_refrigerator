@@ -1,10 +1,13 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.kimjuyoung.please_refrigerator.R;
@@ -41,10 +44,27 @@ public class Cartlist_Adapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.cartlist_item, parent, false);
         }
 
-        // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView textNameView = (TextView) convertView.findViewById(R.id.cart_itemname) ;
-        TextView textAmountView = (TextView) convertView.findViewById(R.id.cart_itemnumbers) ;
 
+
+        // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
+        final TextView textNameView = (TextView) convertView.findViewById(R.id.cart_itemname) ;
+        final TextView textAmountView = (TextView) convertView.findViewById(R.id.cart_itemnumbers) ;
+        Switch sw = (Switch) convertView.findViewById(R.id.checklist);
+
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked == true) {
+                    textAmountView.setTextColor(Color.parseColor("#BDBDBD"));
+                    textNameView.setTextColor(Color.parseColor("#BDBDBD"));
+
+                }else{
+                    textAmountView.setTextColor(Color.parseColor("#000000"));
+                    textNameView.setTextColor(Color.parseColor("#000000"));
+
+                }
+            }
+        });
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         Cartlist_item cartlistviewpos = cartlist_view.get(pos);
 

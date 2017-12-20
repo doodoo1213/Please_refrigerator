@@ -33,11 +33,15 @@ public class ListActivity extends AppCompatActivity {
     ArrayList<Select_info> storage_list = new ArrayList<>();
     List_Adapter adapter;
     ListView listview ;
+
+    String refrigerator = LoginActivity.login_ref;
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.intro_recipe);
+        setTitle(refrigerator);
         ButterKnife.bind(this);
 
         // Adapter 생성

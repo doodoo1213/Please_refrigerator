@@ -13,12 +13,17 @@ import com.example.kimjuyoung.please_refrigerator.R;
 
 import java.util.ArrayList;
 
-public class List_Adapter extends BaseAdapter {
+/**
+ * Created by Kim juyoung on 2017-12-20.
+ */
+
+public class Findlist_Adapter extends BaseAdapter{
+
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<list_item> listViewItemList = new ArrayList<list_item>() ;
+    private ArrayList<String> listViewItemList = new ArrayList<>() ;
 
     // ListViewAdapter의 생성자
-    public List_Adapter() {
+    public Findlist_Adapter() {
 
     }
 
@@ -31,27 +36,20 @@ public class List_Adapter extends BaseAdapter {
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
         final Context context = parent.getContext();
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item, parent, false);
+            convertView = inflater.inflate(R.layout.reflist_item, parent, false);
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        ImageView iconImageView = (ImageView) convertView.findViewById(R.id.storage) ;
-        TextView textNameView = (TextView) convertView.findViewById(R.id.item_name) ;
-        TextView textDateView = (TextView) convertView.findViewById(R.id.item_date) ;
+        TextView textRefListView = (TextView) convertView.findViewById(R.id.findlist) ;
 
-        // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        list_item listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        iconImageView.setImageDrawable(listViewItem.getIcon());
-        textDateView.setText(listViewItem.getDate());
-        textNameView.setText(listViewItem.getName());
+        textRefListView.setText(listViewItemList.get(position));
 
         return convertView;
     }
@@ -64,18 +62,12 @@ public class List_Adapter extends BaseAdapter {
 
     // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
     @Override
-    public list_item getItem(int position) {
+    public String getItem(int position) {
         return listViewItemList.get(position) ;
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(Drawable icon, String Name, String Date) {
-        list_item item = new list_item();
-
-        item.setIcon(icon);
-        item.setName(Name);
-        item.setDate(Date);
-
-        listViewItemList.add(item);
+    public void addList(String refrigerator) {
+        listViewItemList.add(refrigerator);
     }
 }

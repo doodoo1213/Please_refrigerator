@@ -28,10 +28,13 @@ public class LoginActivity extends AppCompatActivity {
     private static final String user = "2017_2_kjy"; //it_refrigerator 데이터베이스 user
     private static final String pass = "selabkjy"; //it_refrigerator 데이터베이스 비밀번호
 
-    EditText phone, refrigerator;
+    EditText phone;
+    EditText refrigerator;
     String query = "";
     String msg = ""; //알림 띄울 문자열 초기화
     Boolean result = false;
+    public static String login_ref;
+    public static String login_p;
 
     ArrayList<String> refrigerator_list = new ArrayList<>();
 
@@ -53,6 +56,12 @@ public class LoginActivity extends AppCompatActivity {
     public void Login(View v){
         Send objSend = new Send();
         objSend.execute("");
+    }
+
+    public void find(View v){
+        Intent search = new Intent(LoginActivity.this, FindActivity.class);
+        startActivity(search);
+        finish();
     }
 
     private class Send extends AsyncTask<String, String, String>
@@ -93,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                     if(result){
+                        login_ref = text_refrigerator;
+                        login_p = text_phone;
                         msg="로그인 성공";
                     }
                     else {
@@ -135,12 +146,5 @@ public class LoginActivity extends AppCompatActivity {
         } // 실행 후 msg로 저장한 문자열 알림창으로 보여주기(실패인지, 성공인지)
     }
 
-    public String getRefrigerator(){
-            return refrigerator.getText().toString();
-    }
-
-    public boolean getResult(){
-        return result;
-    }
 
 }

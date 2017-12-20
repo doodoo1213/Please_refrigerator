@@ -1,7 +1,6 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -193,11 +192,11 @@ public class Show extends Fragment implements View.OnClickListener{
                                     dialog.cancel();
                                 }
                             })
-                    .setNeutralButton("수정",
+                    .setNegativeButton("수정",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                        Intent update = new Intent(getContext(), UpdateActivity.class);
+                                        Intent update = new Intent(getActivity(), UpdateActivity.class);
                                         UpdateActivity.old_name = food.name;
                                         UpdateActivity.old_amount = food.amount;
                                         UpdateActivity.old_category = category;
@@ -206,7 +205,7 @@ public class Show extends Fragment implements View.OnClickListener{
                                         startActivity(update);
                                     }
                             })
-                    .setNegativeButton("삭제",
+                    .setNeutralButton("삭제",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {

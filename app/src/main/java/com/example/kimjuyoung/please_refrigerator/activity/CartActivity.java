@@ -1,13 +1,17 @@
 package com.example.kimjuyoung.please_refrigerator.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kimjuyoung.please_refrigerator.R;
@@ -39,17 +43,24 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     ListView listview ;
     Select_cart Info_cart = new Select_cart();
     EditText cname, camount;
-    //ImageButton totaldelete;
+    TextView iname, iamount;
+    Switch sw;         // 스위치 선언
 
     String query="";
+
+    String phone = LoginActivity.login_p;
+    String refrigerator = LoginActivity.login_ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart);
+        setTitle(refrigerator);
 
         cname = (EditText) findViewById(R.id.input_cartname);
         camount = (EditText)findViewById(R.id.input_cartamount);
+        iname = (TextView)findViewById(R.id.cart_itemname);
+        iamount = (TextView)findViewById(R.id.cart_itemnumbers);
 
         adapter = new Cartlist_Adapter();
         // 리스트뷰 참조 및 Adapter달기
@@ -57,6 +68,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         listview.setAdapter(adapter);
         carttable_list = Info_cart.get();
         input();
+
     }
 
     public void onClick(View view) {
@@ -105,7 +117,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                         msg = "이름을 입력해주세요";
                     }
                     else {
-                        query = "INSERT INTO CART (name, amount) VALUES ('" +  text_name + "', '"  + item_amount + "')";
+                        query = "INSERT INTO CART (name, amount, phone, refrigerator) VALUES ('" +  text_name + "', '"  + item_amount + "', '"+phone+"', '"+refrigerator+"')";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
                         Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
                         stmt.executeUpdate(query); // 쿼리 실행
@@ -137,7 +149,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @OnClick(R.id.gotohome)
-    public void Return(View v){//버튼의 동작 홈뷰로 보내버리기
+    public void gotohome(View v){//버튼의 동작 홈뷰로 보내버리기
         Intent gotohome = new Intent(CartActivity.this, activity_homeview.class);
         startActivity(gotohome);
         finish();

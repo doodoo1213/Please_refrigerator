@@ -1,5 +1,7 @@
 package com.example.kimjuyoung.please_refrigerator.models;
 
+import com.example.kimjuyoung.please_refrigerator.activity.LoginActivity;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,6 +17,9 @@ public class Select_cart {
     private final String user = "2017_2_kjy"; // 데이터베이스 user
     private final String pass = "selabkjy"; //데이터베이스 비밀번호
 
+    String phone = LoginActivity.login_p;
+    String refrigerator = LoginActivity.login_ref;
+
     public ArrayList<Select_cart_info> get() {
 
         final ArrayList<Select_cart_info> carttable_list = new ArrayList<>();
@@ -29,7 +34,7 @@ public class Select_cart {
                     if (conn == null) {
 
                     } else {
-                        String query = "SELECT * FROM CART";
+                        String query = "SELECT * FROM CART WHERE PHONE = '"+phone+"' AND REFRIGERATOR = '"+refrigerator+"' AND PHONE = '"+phone+"' AND REFRIGERATOR = '"+refrigerator+"'";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
 
                         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE); // 쿼리 넣을 준비 함수
