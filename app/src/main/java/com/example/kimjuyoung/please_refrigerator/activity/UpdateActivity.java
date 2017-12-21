@@ -67,15 +67,15 @@ public class UpdateActivity extends AppCompatActivity {
         memo.setText(old_memo);//메모
 
         //저장소 체크박스
-        if (old_category == 1) {
+        if (old_category == 0) {
             refrigerated.setChecked(true);
             space = "냉장";
         }
-        if (old_category == 2) {
+        if (old_category == 1) {
             frozen.setChecked(true);
             space = "냉동";
         }
-        if (old_category == 3) {
+        if (old_category == 2) {
             etc.setChecked(true);
             space = "상온";
         }

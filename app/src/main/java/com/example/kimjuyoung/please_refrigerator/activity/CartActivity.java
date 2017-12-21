@@ -117,7 +117,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                         msg = "이름을 입력해주세요";
                     }
                     else {
-                        query = "INSERT INTO CART (name, amount, phone, refrigerator) VALUES ('" +  text_name + "', '"  + item_amount + "', '"+phone+"', '"+refrigerator+"')";
+                        query = "INSERT INTO CART (name, amount, phone) VALUES ('" +  text_name + "', '"  + item_amount + "', '"+phone+"')";
                         // 입력받은 데이터 데이터베이스에 넣기 위한 쿼리문 작성
                         Statement stmt = conn.createStatement(); // 쿼리 넣을 준비 함수
                         stmt.executeUpdate(query); // 쿼리 실행

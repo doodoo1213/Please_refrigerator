@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 import com.example.kimjuyoung.please_refrigerator.R;
 
+import com.example.kimjuyoung.please_refrigerator.models.Delete_ref;
 /**
  * Created by pc187 on 2017-12-04.
  */
@@ -57,6 +58,14 @@ public class activity_homeview extends AppCompatActivity {
     public void logout(View v){
         Intent logout = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(logout);
+        finish();
+    }
+
+    public void delete_ref(View v){
+        Delete_ref delete_ref = new Delete_ref();
+        delete_ref.delete_ref();
+        Intent deleteref = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(deleteref);
         finish();
     }
 }
